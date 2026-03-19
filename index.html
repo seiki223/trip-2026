@@ -106,7 +106,7 @@ body{
   letter-spacing:.55em; color:rgba(168,96,128,.42);
   display:block; margin-bottom:1.6rem; text-transform:uppercase;
   opacity:0;
-  animation:fadeOnly .8s ease 0.2s both;
+  animation:fadeOnly .6s ease 0.2s both;
 }
 /* ★ タイトル本体 — 筆書き風・左から現れる */
 .h-main{
@@ -114,24 +114,31 @@ body{
   font-size:clamp(1.05rem,2.1vw,1.42rem);
   color:rgba(158,110,140,.88);
   letter-spacing:.08em; line-height:1.5;
+  display:block;
+}
+.h-main2{
+  font-size:clamp(1.08rem,2.2vw,1.48rem);
+  display:block;
+  margin-top:.35rem;
+}
+/* 文字アニメ用 */
+.h-main .c, .h-main2 .c{
   display:inline-block;
-  position:relative;
-  clip-path:inset(0 100% 0 0);
-  animation:brushReveal 7s cubic-bezier(.4,.0,.6,1) 0.3s both;
+  opacity:0;
+  white-space:pre;
 }
 .h-rule{
   width:36px; height:1px;
   background:linear-gradient(90deg,transparent,rgba(168,96,128,.28),transparent);
   margin:1.5rem auto;
   opacity:0;
-  animation:fadeOnly .8s ease 17s both;
 }
 .h-date{
   font-family:'Cormorant Garamond',serif; font-weight:200;
   font-size:clamp(.52rem,.95vw,.66rem);
   color:rgba(92,74,88,.36); letter-spacing:.3em; display:block;
   opacity:0;
-  animation:fadeOnly .8s ease 17.6s both;
+}
 }
 .h-scroll{
   position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
@@ -398,23 +405,6 @@ body{
 .foot strong{color:rgba(221,168,188,.55);font-weight:300;font-style:normal}
 
 /* ════ ANIMATIONS ════ */
-/* 筆書き風：左からclip-pathで露出 + 同時にぼかしが晴れる */
-/* ════ ANIMATIONS ════ */
-.h-main2{
-  font-size:clamp(1.08rem,2.2vw,1.48rem);
-  animation:brushReveal 8s cubic-bezier(.4,.0,.6,1) 5.5s both;
-  display:block;
-  margin-top:.35rem;
-}
-@keyframes brushReveal{
-  0%  { clip-path:inset(0 100% 0 0); }
-  12% { clip-path:inset(0 88%  0 0); }
-  30% { clip-path:inset(0 65%  0 0); }
-  50% { clip-path:inset(0 42%  0 0); }
-  70% { clip-path:inset(0 22%  0 0); }
-  88% { clip-path:inset(0 6%   0 0); }
-  100%{ clip-path:inset(0 0%   0 0); }
-}
 @keyframes fadeOnly{
   from{ opacity:0; }
   to  { opacity:1; }
@@ -948,6 +938,85 @@ body{
     es.forEach(e=>{if(e.isIntersecting){e.target.style.animation='rise .5s cubic-bezier(.14,.84,.38,1) both';ro.unobserve(e.target);}});
   },{threshold:.07});
   document.querySelectorAll('.tl-row,.sp,.ic,.task-li').forEach(el=>ro.observe(el));
+})();
+
+/* ════ タイトル文字アニメーション ════
+   1行目：均一なペースで左から順に表示
+   2行目：「京の春を綴る」まで均一 → 「綴る」で約1.5秒停止
+          → 「早起き」で再スタート → 「二人旅」だけゆっくり
+═══════════════════════════════════ */
+(function(){
+  const line1 = document.querySelector('.h-main');
+  const line2 = document.querySelector('.h-main2');
+  const rule  = document.querySelector('.h-rule');
+  const date  = document.querySelector('.h-date');
+
+  // 文字列を1文字ずつspanに分解（スペース・全角スペースも保持）
+  function splitChars(el){
+    const text = el.textContent;
+    el.innerHTML = '';
+    return [...text].map(ch => {
+      const s = document.createElement('span');
+      s.style.cssText = 'display:inline-block;opacity:0;';
+      s.textContent = ch;
+      el.appendChild(s);
+      return s;
+    });
+  }
+
+  const chars1 = splitChars(line1);
+  const chars2 = splitChars(line2);
+
+  // 1文字フェードイン
+  function showChar(span, delay){
+    return new Promise(res => {
+      setTimeout(() => {
+        span.animate([{opacity:0},{opacity:1}],{duration:80,fill:'forwards'});
+        setTimeout(res, 80);
+      }, delay);
+    });
+  }
+
+  // ── 1行目：1文字あたり210ms ──
+  const SPEED1 = 210; // ms/文字
+
+  // ── 2行目の設定 ──
+  const SPEED2_FAST  = 210;  // 「京の春を綴る　早起き」の速さ
+  const PAUSE_AFTER  = 1500; // 「綴る」後の停止時間(ms)
+  const SPEED2_SLOW  = 900;  // 「二人旅」の1文字あたりの速さ
+
+  // 「綴る」は2行目の index 5（0始まり: 京0 の1 春2 を3 綴4 る5）
+  const PAUSE_INDEX  = 5;  // 「る」を表示した後に停止
+  // 「二人旅」は末尾3文字
+  const SLOW_FROM    = chars2.length - 3;
+
+  async function animate(){
+    // 1行目を表示
+    const line1Start = 300; // 0.3秒後にスタート
+    for(let i=0; i<chars1.length; i++){
+      await showChar(chars1[i], i===0 ? line1Start : SPEED1);
+    }
+
+    // 2行目スタート（1行目完了後1秒待つ）
+    await new Promise(r => setTimeout(r, 1000));
+    for(let i=0; i<chars2.length; i++){
+      const isSlowZone = i >= SLOW_FROM;
+      const speed = isSlowZone ? SPEED2_SLOW : SPEED2_FAST;
+      const pauseAfter = i === PAUSE_INDEX ? PAUSE_AFTER : 0;
+      await showChar(chars2[i], i===0 ? 0 : speed);
+      if(pauseAfter) await new Promise(r => setTimeout(r, pauseAfter));
+    }
+
+    // 3行目（日付）を1秒後にフェードイン
+    setTimeout(()=>{
+      if(rule) rule.animate([{opacity:0},{opacity:1}],{duration:600,fill:'forwards'});
+      setTimeout(()=>{
+        if(date) date.animate([{opacity:0},{opacity:1}],{duration:600,fill:'forwards'});
+      },300);
+    }, 800);
+  }
+
+  animate();
 })();
 </script>
 </body>
