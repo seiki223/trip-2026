@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北の文道から手仕事の美を訪ねて　京の春を綴る　早起き二人旅 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500;600&family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Shippori+Mincho+B1:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── tokens ── */
+:root{
+  --sk:#dda8bc; --skl:#f7edf2; --skd:#a86080;
+  --ink:#1e1620; --ink2:#5c4a58; --ink3:#8c7888;
+  --au:#9a7220;  --aul:#f2e5b0;
+  --mo:#485e38;
+  --bg:#fdf9f6;  --bg2:#f4ece5;
+  --wh:#ffffff;  --bdr:#e8dae2; --bdr2:#f0e4ea;
+  /* ヒーローから引いた桜空の色味をページ全体にも微かに */
+  --tint-top:rgba(214,182,208,.06);
+  --tint-btm:rgba(248,232,222,.06);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  /* ページ全体にヒーローと同系の極薄グラデーション */
+  background:
+    linear-gradient(175deg,
+      rgba(214,182,208,.09) 0%,
+      rgba(253,249,246,1) 18%,
+      rgba(253,249,246,1) 82%,
+      rgba(248,232,222,.09) 100%),
+    var(--bg);
+  color:var(--ink);
+  font-family:'Noto Serif JP',serif; font-weight:300;
+  min-height:100vh; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased; letter-spacing:.01em;
+}
+
+/* ─ 全ページ花びらCanvas ─ */
+#global-cv{
+  position:fixed; inset:0; width:100%; height:100%;
+  pointer-events:none; z-index:9999;
+}
+
+/* ════ HERO ════ */
+.hero{
+  position:relative; min-height:100vh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  overflow:hidden; cursor:default;
+}
+.h-sky{
+  position:absolute; inset:0;
+  background:linear-gradient(165deg,
+    #b4d4ec 0%,#c4c2e2 13%,#d6b6d0 27%,#e6bcca 44%,
+    #f0d4d6 60%,#f8e8de 76%,#fcf2ea 90%,#fefaf6 100%);
+}
+.h-wash{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 88% 68% at 14% 82%,rgba(244,182,202,.4) 0%,transparent 54%),
+    radial-gradient(ellipse 68% 58% at 86% 14%,rgba(172,212,238,.34) 0%,transparent 54%),
+    radial-gradient(ellipse 58% 48% at 50% 52%,rgba(255,232,222,.26) 0%,transparent 58%),
+    radial-gradient(ellipse 38% 32% at 70% 84%,rgba(238,208,228,.32) 0%,transparent 50%);
+}
+.h-paper{
+  position:absolute; inset:0; opacity:.03;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(100,60,80,.9) 2px,rgba(100,60,80,.9) 3px),
+    repeating-linear-gradient(90deg,transparent,transparent 4px,rgba(100,60,80,.28) 4px,rgba(100,60,80,.28) 5px);
+}
+.h-tree{
+  position:absolute; inset:0; width:100%; height:100%;
+  pointer-events:none; z-index:1; will-change:transform;
+}
+.h-art{
+  position:relative; z-index:3;
+  width:100%; height:100vh; pointer-events:none;
+}
+
+/* 浮遊装飾文字 */
+.h-float{
+  position:absolute;
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  color:rgba(168,96,128,.1);
+  user-select:none; pointer-events:none; line-height:1;
+}
+.hf1{font-size:clamp(.8rem,1.8vw,1.1rem);top:17%;left:7%;letter-spacing:.35em;animation:dA 9s ease-in-out infinite}
+.hf2{font-size:clamp(.6rem,1.2vw,.82rem);top:74%;left:11%;letter-spacing:.2em;animation:dB 12s ease-in-out infinite}
+.hf3{font-size:clamp(.7rem,1.5vw,.95rem);top:22%;right:8%;letter-spacing:.28em;animation:dA 10s ease-in-out infinite reverse}
+.hf4{font-size:clamp(.5rem,1.1vw,.72rem);top:80%;right:13%;letter-spacing:.32em;animation:dB 13s ease-in-out infinite reverse}
+.hf5{font-size:clamp(.45rem,.9vw,.62rem);top:46%;left:3%;letter-spacing:.22em;animation:dA 15s ease-in-out infinite}
+
+/* メインタイトル */
+.h-title{
+  position:absolute;
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  text-align:center; width:100%;
+  will-change:transform;
+}
+.h-eyebrow{
+  font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:200;
+  font-size:clamp(.52rem,.95vw,.66rem);
+  letter-spacing:.55em; color:rgba(168,96,128,.42);
+  display:block; margin-bottom:1.6rem; text-transform:uppercase;
+  opacity:0;
+  animation:fadeOnly .8s ease 0.2s both;
+}
+/* ★ タイトル本体 — 筆書き風・左から現れる */
+.h-main{
+  font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300;
+  font-size:clamp(1.05rem,2.1vw,1.42rem);
+  color:rgba(158,110,140,.88);
+  letter-spacing:.08em; line-height:1.5;
+  display:inline-block;
+  position:relative;
+  clip-path:inset(0 100% 0 0);
+  animation:brushReveal 7s cubic-bezier(.4,.0,.6,1) 0.3s both;
+}
+.h-rule{
+  width:36px; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(168,96,128,.28),transparent);
+  margin:1.5rem auto;
+  opacity:0;
+  animation:fadeOnly .8s ease 17s both;
+}
+.h-date{
+  font-family:'Cormorant Garamond',serif; font-weight:200;
+  font-size:clamp(.52rem,.95vw,.66rem);
+  color:rgba(92,74,88,.36); letter-spacing:.3em; display:block;
+  opacity:0;
+  animation:fadeOnly .8s ease 17.6s both;
+}
+.h-scroll{
+  position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+  font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:200;
+  font-size:.58rem; letter-spacing:.4em;
+  color:rgba(168,96,128,.28); z-index:4;
+  animation:breath 3.8s ease-in-out infinite;
+}
+
+/* ════ SECTION LAYOUT ════ */
+.wrap{ max-width:740px; margin:0 auto; padding:5.5rem 2rem; }
+.wrap--sm{ padding-top:4rem; padding-bottom:4rem; }
+
+/* ページ内セクションの区切り：ヒーローの桜色を薄く引き継ぐ */
+.stripe{
+  height:2px;
+  background:linear-gradient(90deg,var(--skd) 0%,var(--au) 50%,var(--mo) 100%);
+}
+
+/* section eyebrow — Cormorant italic でヒーローと統一 */
+.eyebrow{
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-size:.68rem; letter-spacing:.44em; color:var(--au);
+  text-transform:uppercase; margin-bottom:.5rem;
+}
+/* section title — Shippori、下線をヒーロー桜色 */
+.stitle{
+  font-family:'Shippori Mincho B1',serif; font-weight:700;
+  font-size:clamp(1.25rem,2.6vw,1.75rem); color:var(--ink);
+  padding-bottom:.78rem; margin-bottom:2.6rem; position:relative;
+}
+.stitle::after{
+  content:''; position:absolute; bottom:0; left:0;
+  width:1.6rem; height:1px; background:var(--skd);
+}
+
+/* ════ TIMELINE ════ */
+.tl{ position:relative; }
+.tl::before{
+  content:''; position:absolute;
+  left:70px; top:0; bottom:0; width:1px;
+  background:linear-gradient(to bottom,transparent,var(--sk) 3%,var(--sk) 97%,transparent);
+}
+.tl-row{
+  display:grid; grid-template-columns:70px 1fr;
+  gap:0 2rem; position:relative; margin-bottom:.2rem; opacity:0;
+}
+.tl-t{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.85rem; color:var(--ink3);
+  text-align:right; padding-top:1rem;
+  line-height:1.3; position:relative;
+}
+.tl-t small{ font-size:.7em; opacity:.62; display:block; }
+.tl-t::after{
+  content:''; position:absolute;
+  right:-2.15rem; top:1.35rem;
+  width:7px; height:7px; border-radius:50%;
+  background:var(--bg); border:1.5px solid var(--skd);
+  transform:translateX(50%);
+}
+.tl-c{
+  background:var(--wh); border:1px solid var(--bdr2);
+  border-radius:3px; padding:.82rem 1.1rem; margin:.4rem 0;
+  position:relative; transition:box-shadow .25s,transform .25s;
+}
+.tl-c::before{
+  content:''; position:absolute;
+  left:-4px; top:1rem; width:7px; height:7px;
+  background:var(--wh);
+  border-left:1px solid var(--bdr2); border-bottom:1px solid var(--bdr2);
+  transform:rotate(45deg);
+}
+.tl-row.hl .tl-c{background:linear-gradient(135deg,#fffaf8,#fff1f4);border-color:rgba(220,168,188,.46)}
+.tl-row.hl .tl-c::before{background:#fffaf8;border-color:rgba(220,168,188,.46)}
+.tl-row.drv .tl-c{background:linear-gradient(135deg,#f3f8ef,#edf4e7);border-color:#bcd0ac}
+.tl-row.drv .tl-c::before{background:#f3f8ef;border-color:#bcd0ac}
+.tl-row.ctn .tl-c{background:linear-gradient(135deg,#fdfbf3,#fef8df);border-color:#d4bc6a}
+.tl-row.ctn .tl-c::before{background:#fdfbf3;border-color:#d4bc6a}
+
+.tl-n{
+  font-family:'Noto Serif JP',serif; font-weight:500;
+  font-size:.9rem; color:var(--ink); margin-bottom:.18rem; letter-spacing:.02em;
+}
+.tl-d{ font-size:.75rem; color:var(--ink2); line-height:1.78; }
+.tl-d b{ color:var(--ink); font-weight:500; }
+
+.route-hint{
+  margin-top:.5rem; padding:.5rem .7rem;
+  background:rgba(72,94,56,.055); border-left:2px solid var(--mo);
+  border-radius:0 3px 3px 0; font-size:.71rem; color:var(--mo); line-height:1.7;
+}
+.route-hint b{ color:#2e4020; }
+
+.tags{ display:flex; flex-wrap:wrap; gap:.26rem; margin-top:.42rem; }
+.tag{
+  font-size:.63rem; font-weight:600; letter-spacing:.04em;
+  padding:.1rem .5rem; border-radius:20px;
+  display:inline-flex; align-items:center; gap:.22rem;
+}
+.tag.pk{background:var(--skl);color:var(--skd)}
+.tag.au{background:var(--aul);color:var(--au)}
+.tag.mo{background:#e2edda;color:var(--mo)}
+.tag.or{background:#feeedd;color:#9e6018}
+.tag.rd{background:#fce5e5;color:#a03030}
+
+/* ════ INFO CARDS ════ */
+.ic-stack{ display:grid; gap:.85rem; }
+.ic{
+  background:var(--wh); border:1px solid var(--bdr); border-radius:3px;
+  overflow:hidden; opacity:0; transition:transform .25s,box-shadow .25s;
+}
+.ic-hd{
+  display:flex; align-items:center; gap:.62rem;
+  padding:.68rem 1.1rem; background:var(--bg2); border-bottom:1px solid var(--bdr);
+  font-family:'Noto Serif JP',serif; font-weight:500;
+  font-size:.8rem; color:var(--ink); letter-spacing:.04em;
+}
+.ic-dot{ width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ic-bd{ padding:.95rem 1.1rem; }
+.ic-row{
+  display:grid; grid-template-columns:7.8rem 1fr;
+  gap:.2rem .8rem; font-size:.75rem;
+  color:var(--ink2); line-height:1.78; margin-bottom:.06rem; align-items:baseline;
+}
+.ic-lbl{ color:var(--au); font-size:.67rem; font-weight:600; letter-spacing:.07em; white-space:nowrap; }
+.ic-note{
+  margin-top:.72rem; padding:.58rem .82rem;
+  background:var(--bg); border-radius:2px;
+  font-size:.7rem; color:var(--ink3); line-height:1.72;
+}
+.ic-bd a,.ic-note a{
+  color:var(--skd); text-decoration:none;
+  border-bottom:1px dashed rgba(168,96,128,.28); font-size:.73rem;
+}
+.ic-bd a:hover,.ic-note a:hover{ color:var(--au); }
+
+/* ════ PARKING — グレー系上書き ════ */
+.parking-section .ic{
+  border-color:#d8d2d0;
+}
+.parking-section .ic-hd{
+  background:#f0edea;
+  border-bottom-color:#d8d2d0;
+  color:#4a4440;
+}
+.parking-section .ic-dot{
+  background:#a09890 !important;
+}
+.parking-section .ic-bd{
+  background:#faf8f7;
+}
+.parking-section .ic-lbl{
+  color:#7a7270;
+}
+.parking-section .ic-row span,
+.parking-section .ic-note{
+  color:#5a5250;
+}
+.parking-section .ic-note{
+  background:#f0edea;
+}
+.parking-section .ic-bd a,
+.parking-section .ic-note a{
+  color:#7a7270;
+  border-bottom-color:rgba(120,110,108,.28);
+}
+.parking-section .ic-bd a:hover,
+.parking-section .ic-note a:hover{ color:#4a4440; }
+.parking-section .ic-row b{ color:#3a3230; }
+.sh-wrap{ overflow-x:auto; border-radius:3px; border:1px solid var(--bdr); }
+.sh-t{ width:100%; border-collapse:collapse; min-width:440px; font-size:.75rem; }
+.sh-t th{
+  background:#7a8a6a; color:rgba(255,255,255,.88);
+  font-family:'Cormorant Garamond',serif; font-weight:400;
+  padding:.56rem 1rem; text-align:left;
+  font-size:.72rem; letter-spacing:.08em; white-space:nowrap;
+}
+.sh-t td{
+  padding:.65rem 1rem; border-bottom:1px solid var(--bdr);
+  color:var(--ink2); vertical-align:middle;
+}
+.sh-t td:first-child{
+  white-space:nowrap; font-weight:500; font-size:.75rem;
+  border-right:1px solid var(--bdr); background:var(--bg); color:var(--ink); min-width:9rem;
+}
+.sh-t tr:last-child td{ border-bottom:none; }
+.tp{display:inline-block;border-radius:2px;padding:.03rem .38rem;font-weight:600;font-size:.71rem;margin:.07rem}
+.tp-n{background:var(--skl);color:var(--skd)}
+.tp-go{background:var(--ink);color:#fff}
+.tp-g2{background:#e0a8bc;color:#6e2044}
+.tp-bk{background:var(--mo);color:#fff}
+.tp-b2{background:#aed0a0;color:#2a4018}
+.sh-leg{display:flex;gap:1.1rem;flex-wrap:wrap;margin-top:.58rem;font-size:.68rem;color:var(--ink3);align-items:center}
+.sh-leg span{display:flex;align-items:center;gap:.3rem}
+.ld{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+
+/* ════ SPOT CARDS ════ */
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.05rem}
+.sp{
+  background:var(--wh); border:1px solid var(--bdr); border-radius:3px;
+  padding:1.3rem 1.2rem 1.1rem; position:relative; overflow:hidden;
+  transition:transform .2s,box-shadow .2s; opacity:0;
+}
+.sp:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(160,90,120,.09)}
+.sp-bar{position:absolute;top:0;left:0;right:0;height:2px;background:var(--skd)}
+.sp.gold .sp-bar{background:var(--au)}
+.sp.moss .sp-bar{background:var(--mo)}
+.sp-n{
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  color:var(--bdr2); position:absolute; top:.45rem; right:.9rem;
+  font-size:1.9rem; line-height:1;
+}
+.sp-name{font-family:'Noto Serif JP',serif;font-weight:500;font-size:.9rem;color:var(--ink);margin-bottom:.22rem}
+.sp-desc{
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-size:.78rem; color:var(--skd); line-height:1.55;
+  margin-bottom:.7rem; opacity:.85;
+}
+.sp-chips{display:flex;flex-wrap:wrap;gap:.28rem;margin-bottom:.62rem}
+.sp-chip{
+  font-size:.63rem;font-weight:600;letter-spacing:.03em;
+  padding:.1rem .48rem;border-radius:20px;
+  display:inline-flex;align-items:center;gap:.2rem;
+}
+.sp-chip.hr{background:#e2edda;color:var(--mo)}
+.sp-chip.rv{background:var(--skl);color:var(--skd)}
+.sp-meta{font-size:.72rem;color:var(--ink3);line-height:1.9}
+.sp-meta a{color:var(--skd);text-decoration:none;border-bottom:1px dashed rgba(168,96,128,.28)}
+.sp-meta a:hover{color:var(--au)}
+.sp-route{
+  margin-top:.62rem;padding:.5rem .72rem;
+  background:rgba(72,94,56,.055);border-left:2px solid var(--mo);
+  border-radius:0 2px 2px 0;font-size:.68rem;color:var(--mo);line-height:1.7;
+}
+.sp-route b{color:#2e4020}
+
+/* ════ TASKS ════ */
+.task-ul{list-style:none}
+.task-li{
+  display:flex;align-items:flex-start;gap:.65rem;
+  padding:.78rem 0;border-bottom:1px solid var(--bdr2);
+  font-size:.8rem;color:var(--ink2);line-height:1.68;
+}
+.chk{
+  width:18px;height:18px;border:1.5px solid var(--sk);border-radius:2px;
+  flex-shrink:0;margin-top:.12rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .18s;
+}
+.chk:hover{background:var(--skl)}
+.chk.done{background:var(--skd);border-color:var(--skd)}
+.chk.done::after{content:'✓';color:#fff;font-size:.66rem}
+
+/* ════ FOOTER ════ */
+.foot{
+  /* ヒーローの桜色を極薄でフッターにも */
+  background:linear-gradient(175deg,var(--ink) 0%,#1a1220 100%);
+  color:rgba(255,255,255,.28);
+  text-align:center;padding:3rem 2rem;
+  font-size:.7rem;letter-spacing:.2em;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+}
+.foot strong{color:rgba(221,168,188,.55);font-weight:300;font-style:normal}
+
+/* ════ ANIMATIONS ════ */
+/* 筆書き風：左からclip-pathで露出 + 同時にぼかしが晴れる */
+/* ════ ANIMATIONS ════ */
+.h-main2{
+  font-size:clamp(1.08rem,2.2vw,1.48rem);
+  animation:brushReveal 8s cubic-bezier(.4,.0,.6,1) 5.5s both;
+  display:block;
+  margin-top:.35rem;
+}
+@keyframes brushReveal{
+  0%  { clip-path:inset(0 100% 0 0); }
+  12% { clip-path:inset(0 88%  0 0); }
+  30% { clip-path:inset(0 65%  0 0); }
+  50% { clip-path:inset(0 42%  0 0); }
+  70% { clip-path:inset(0 22%  0 0); }
+  88% { clip-path:inset(0 6%   0 0); }
+  100%{ clip-path:inset(0 0%   0 0); }
+}
+@keyframes fadeOnly{
+  from{ opacity:0; }
+  to  { opacity:1; }
+}
+@keyframes paintIn{
+  0%{opacity:0;filter:blur(4px)}
+  100%{opacity:1;filter:blur(0)}
+}
+@keyframes breath{0%,100%{opacity:.22}50%{opacity:.58}}
+@keyframes dA{0%,100%{transform:translateY(0) rotate(-.4deg)}50%{transform:translateY(-7px) rotate(.4deg)}}
+@keyframes dB{0%,100%{transform:translateY(0) rotate(.4deg)}50%{transform:translateY(5px) rotate(-.4deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:560px){
+  .tl::before{left:56px}
+  .tl-row{grid-template-columns:56px 1fr;gap:0 1.4rem}
+  .tl-t{font-size:.76rem}
+  .tl-t::after{right:-1.5rem}
+  .sg{grid-template-columns:1fr}
+  .ic-row{grid-template-columns:5.5rem 1fr}
+}
+@media print{.h-scroll,#global-cv{display:none}}
+</style>
+</head>
+<body>
+
+<canvas id="global-cv"></canvas>
+
+<!-- ════ HERO ════ -->
+<header class="hero" id="hero">
+  <div class="h-sky"></div>
+  <div class="h-wash"></div>
+  <div class="h-paper"></div>
+
+  <svg class="h-tree" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <filter id="bl2"><feGaussianBlur stdDeviation="2.5"/></filter>
+      <filter id="bl5"><feGaussianBlur stdDeviation="5"/></filter>
+      <filter id="bl10"><feGaussianBlur stdDeviation="10"/></filter>
+      <filter id="bl18"><feGaussianBlur stdDeviation="18"/></filter>
+      <filter id="bl28"><feGaussianBlur stdDeviation="28"/></filter>
+    </defs>
+    <!-- 遠景左（ぼかし強） -->
+    <g filter="url(#bl28)" opacity=".16">
+      <path d="M640 900 C635 750,610 610,592 470 C578 388,588 328,578 248 C568 172,552 132,558 72" stroke="#b07898" stroke-width="18" fill="none"/>
+      <path d="M578 248 C550 214,516 196,474 182" stroke="#b07898" stroke-width="12" fill="none"/>
+      <circle cx="468" cy="176" r="58" fill="#f0b0c6"/><circle cx="488" cy="154" r="42" fill="#f8c8d8"/><circle cx="442" cy="163" r="38" fill="#e8a0b8"/><circle cx="476" cy="130" r="30" fill="#fad4e2"/>
+    </g>
+    <!-- 遠景右（ぼかし中） -->
+    <g filter="url(#bl18)" opacity=".15">
+      <path d="M940 900 C934 795,908 692,892 572 C880 480,888 418,870 338" stroke="#c07898" stroke-width="14" fill="none"/>
+      <path d="M870 338 C842 306,810 292,778 284" stroke="#c07898" stroke-width="9" fill="none"/>
+      <circle cx="772" cy="278" r="52" fill="#f2b8c8"/><circle cx="792" cy="258" r="38" fill="#fad0dc"/><circle cx="748" cy="268" r="34" fill="#eca8bc"/>
+    </g>
+    <!-- 手前中央の主木 -->
+    <g filter="url(#bl2)" opacity=".42">
+      <path d="M700 900 C710 758,724 615,734 474 C742 382,730 312,740 212 C748 138,764 95,770 32" stroke="#c07898" stroke-width="24" fill="none" stroke-linecap="round"/>
+      <path d="M740 212 C712 184,678 167,630 160" stroke="#c07898" stroke-width="16" fill="none" stroke-linecap="round"/>
+      <path d="M738 336 C708 306,672 292,628 289" stroke="#c07898" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <path d="M754 134 C734 112,702 106,676 116" stroke="#c07898" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <ellipse cx="630" cy="154" rx="72" ry="55" fill="#f0b0c4"/><ellipse cx="658" cy="136" rx="55" ry="44" fill="#fac4d6"/>
+      <ellipse cx="608" cy="144" rx="50" ry="42" fill="#e8a0b8"/><ellipse cx="644" cy="120" rx="42" ry="36" fill="#fcd6e2"/>
+      <ellipse cx="634" cy="284" rx="64" ry="52" fill="#f0b0c4"/><ellipse cx="660" cy="266" rx="50" ry="40" fill="#fac4d6"/>
+      <ellipse cx="612" cy="274" rx="46" ry="38" fill="#e8a0b8"/><ellipse cx="678" cy="108" rx="38" ry="32" fill="#fcd6e2"/>
+    </g>
+    <ellipse cx="600" cy="520" rx="720" ry="210" fill="rgba(255,238,248,.1)" filter="url(#bl28)"/>
+    <g filter="url(#bl10)" opacity=".13">
+      <ellipse cx="190" cy="882" rx="175" ry="16" fill="#f0b8c8"/>
+      <ellipse cx="790" cy="872" rx="135" ry="13" fill="#f0b8c8"/>
+    </g>
+  </svg>
+
+  <div class="h-art">
+    <div class="h-float hf1">a journey for two</div>
+    <div class="h-float hf2">二〇二六年&ensp;春</div>
+    <div class="h-float hf3">sakura</div>
+    <div class="h-float hf4">april</div>
+    <div class="h-float hf5">四月四日</div>
+
+    <div class="h-title" id="h-title">
+      <span class="h-eyebrow">kyoto · a journey for two · spring 2026</span>
+      <span class="h-main">北の文道から手仕事の美を訪ねて</span>
+      <span class="h-main h-main2">京の春を綴る　早起き二人旅</span>
+      <div class="h-rule"></div>
+      <span class="h-date">2026年4月4日（土）&emsp;勢和多気IC 発</span>
+    </div>
+  </div>
+
+  <div class="h-scroll">scroll ↓</div>
+</header>
+
+<div class="stripe"></div>
+
+<!-- ════ TIMELINE ════ -->
+<div class="wrap">
+  <p class="eyebrow">Itinerary</p>
+  <h2 class="stitle">タイムライン</h2>
+  <div class="tl">
+
+    <div class="tl-row drv">
+      <div class="tl-t">07:10</div>
+      <div class="tl-c">
+        <div class="tl-n">🚗 勢和多気IC &ensp;出発</div>
+        <div class="tl-d">紀勢道 → 伊勢道 → 東名阪 → 亀山JCT → 新名神 → 名神</div>
+      </div>
+    </div>
+
+    <div class="tl-row hl">
+      <div class="tl-t">09:00<small>─ 09:50</small></div>
+      <div class="tl-c">
+        <div class="tl-n">⛩ 北野天満宮・平野神社</div>
+        <div class="tl-d">公式駐車場（9:00開場・約300台）&ensp;滞在50分</div>
+        <div class="route-hint">
+          <b>🌸 平野神社への近道</b>&emsp;天満宮の <b>北門（御前通沿い）</b> を出て西へ徒歩約3〜4分で平野神社の東鳥居に到着。南側の正面参道より大幅に短縮
+        </div>
+        <div class="tags">
+          <span class="tag rd">🚗 9:00着厳守</span>
+          <span class="tag pk">🌸 桜名所</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-t">09:50<small>─ 10:10</small></div>
+      <div class="tl-c">
+        <div class="tl-n">🫘 中村製餡所</div>
+        <div class="tl-d">天満宮から徒歩5分&ensp;滞在20分</div>
+      </div>
+    </div>
+
+    <div class="tl-row drv">
+      <div class="tl-t">10:10</div>
+      <div class="tl-c">
+        <div class="tl-n">🚗 北野 出発 → 御池地下P 入庫</div>
+        <div class="tl-d">西大路通 → 四条 → 御池通 → <b>西入口</b>から入庫（B1 中央・ゼスト側東寄りが徒歩移動に便利）</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-t">10:40<small>─ 11:40</small></div>
+      <div class="tl-c">
+        <div class="tl-n">📜 鳩居堂 本店</div>
+        <div class="tl-d">地下街東出口 → 寺町通 徒歩5分&ensp;滞在60分</div>
+        <div class="tags"><span class="tag au">ショッピング</span></div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-t">11:40<small>─ 12:00</small></div>
+      <div class="tl-c">
+        <div class="tl-n">🚶 鳩居堂 → 近又へ徒歩移動</div>
+        <div class="tl-d">寺町通を南下 → 御幸町通を北上&ensp;約10分</div>
+      </div>
+    </div>
+
+    <div class="tl-row hl">
+      <div class="tl-t">12:00<small>─ 13:30</small></div>
+      <div class="tl-c">
+        <div class="tl-n">🍱 懐石 近又&ensp;ランチ</div>
+        <div class="tl-d">1801年創業・国登録有形文化財&ensp;滞在90分</div>
+        <div class="tags">
+          <span class="tag rd">✅ 12:00 予約済</span>
+          <span class="tag au">クレカ可</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row ctn">
+      <div class="tl-t">13:30<small>─ 13:45</small></div>
+      <div class="tl-c">
+        <div class="tl-n">🅿 御池地下P に戻る・精算・出庫</div>
+        <div class="tl-d">近又を出て徒歩で駐車場へ（約10分）<br>場内の<b>事前精算機で支払い</b> → <b>15分以内</b>に出庫</div>
+        <div class="tags">
+          <span class="tag or">⏱ 精算後15分以内に出庫</span>
+          <span class="tag or">上限 1,800円</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row drv">
+      <div class="tl-t">13:45</div>
+      <div class="tl-c">
+        <div class="tl-n">🚗 御池地下P 出発 → 大山崎へ</div>
+        <div class="tl-d">西出口スロープ → <b>直進</b>（右折NG）→ <b>堀川御池を左折</b> → 堀川通南下 → 府道10号<br><b>国道171号 完全回避</b></div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-t">14:25</div>
+      <div class="tl-c">
+        <div class="tl-n">🅿 タイムズ JR山崎駅前 駐車</div>
+        <div class="tl-d">渋滞考慮の余裕あり</div>
+      </div>
+    </div>
+
+    <div class="tl-row drv">
+      <div class="tl-t">14:30</div>
+      <div class="tl-c">
+        <div class="tl-n">🚌 シャトルバス乗車</div>
+        <div class="tl-d">JR山崎駅前 → 大山崎山荘美術館&ensp;所要約5分&ensp;定員13名・高齢者優先・予約不可</div>
+        <div class="tags"><span class="tag pk">🎯 14:30便 目標</span></div>
+      </div>
+    </div>
+
+    <div class="tl-row hl">
+      <div class="tl-t">14:40<small>─ 16:30</small></div>
+      <div class="tl-c">
+        <div class="tl-n">🖼 大山崎山荘美術館</div>
+        <div class="tl-d">滞在110分&ensp;モネの睡蓮 ＋ 特別展「共鳴　河井寛次郎×濱田庄司」・安藤忠雄設計「地中館」</div>
+        <div class="tags"><span class="tag rd">⚠️ 入館締切 16:30 厳守</span></div>
+      </div>
+    </div>
+
+    <div class="tl-row drv">
+      <div class="tl-t">16:40</div>
+      <div class="tl-c">
+        <div class="tl-n">🚌 帰りシャトル</div>
+        <div class="tl-d">美術館 → JR山崎駅前</div>
+        <div class="tags"><span class="tag mo">🎯 16:40便 目標</span></div>
+      </div>
+    </div>
+
+    <div class="tl-row drv">
+      <div class="tl-t">17:00</div>
+      <div class="tl-c">
+        <div class="tl-n">🚗 大山崎IC 出発・帰路</div>
+        <div class="tl-d">大山崎IC → 名神 → 新名神 → 伊勢道 → 紀勢道</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-t">20:00<small>〜20:30</small></div>
+      <div class="tl-c"><div class="tl-n">🏠 帰宅</div></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="stripe"></div>
+
+<!-- ════ PARKING ════ -->
+<div class="wrap wrap--sm">
+  <p class="eyebrow">Parking Guide</p>
+  <h2 class="stitle">御池地下駐車場</h2>
+  <div class="ic-stack parking-section">
+    <div class="ic">
+      <div class="ic-hd"><div class="ic-dot"></div>入庫</div>
+      <div class="ic-bd">
+        <div class="ic-row"><span class="ic-lbl">入口</span><span>御池通を<b>東向き</b>に走行 → 烏丸交差点から2つ目の信号を左（<b>西入口</b>）</span></div>
+        <div class="ic-row"><span class="ic-lbl">駐車位置</span><span>B1 <b>中央エリア（ゼスト側・東寄り）</b>が地上への徒歩移動に便利</span></div>
+        <div class="ic-row"><span class="ic-lbl">サイズ制限</span><span>車高 2.1m ／ 車幅 2.0m ／ 車長 5.0m 以内</span></div>
+      </div>
+    </div>
+    <div class="ic">
+      <div class="ic-hd"><div class="ic-dot"></div>場内について</div>
+      <div class="ic-bd">
+        <div class="ic-row"><span class="ic-lbl">B1 ↔ B2</span><span>スロープが2か所。B1に停めると階層移動が不要で楽</span></div>
+        <div class="ic-row"><span class="ic-lbl">事前精算機</span><span>各階に設置。精算後は<b>15分以内</b>に出庫レーンへ</span></div>
+        <div class="ic-note">
+          <a href="https://www.zestoike.com/wp-content/themes/zest/pdf/oike_parking_map.pdf" target="_blank">📄 場内MAP（PDF）</a>&ensp;／&ensp;<a href="https://www.zestoike.com/parking/" target="_blank">🌐 駐車場公式ページ</a>
+        </div>
+      </div>
+    </div>
+    <div class="ic">
+      <div class="ic-hd"><div class="ic-dot"></div>地上への出方（徒歩）</div>
+      <div class="ic-bd">
+        <div class="ic-row"><span class="ic-lbl">鳩居堂へ</span><span>地下街（ゼスト御池）<b>東端の出口・階段</b>から地上へ → 寺町通すぐ</span></div>
+        <div class="ic-row"><span class="ic-lbl">近又へ</span><span>鳩居堂から寺町通を南下 → 御幸町通へ 徒歩約10分（駐車場には戻らず直行）</span></div>
+        <div class="ic-note">迷ったら地下街内の「御幸町通」「寺町通」の案内板を目印に。</div>
+      </div>
+    </div>
+    <div class="ic">
+      <div class="ic-hd"><div class="ic-dot"></div>出庫（山崎方面）</div>
+      <div class="ic-bd">
+        <div class="ic-row"><span class="ic-lbl">精算</span><span>近又から戻り、場内の事前精算機で支払い → <b>15分以内</b>に出庫</span></div>
+        <div class="ic-row"><span class="ic-lbl">出口</span><span>「<b>西出口（堀川方面）</b>」の看板に従い、スロープ後<b>直進</b>（右折NG）</span></div>
+        <div class="ic-row"><span class="ic-lbl">ルート</span><span><b>堀川御池を左折</b> → 堀川通南下 → 府道10号 → 大山崎（171号回避）</span></div>
+        <div class="ic-row"><span class="ic-lbl">料金</span><span>昼間上限 <b>1,800円</b>&ensp;クレカ・交通系IC・QR決済可</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stripe"></div>
+
+<!-- ════ SHUTTLE ════ -->
+<div class="wrap wrap--sm">
+  <p class="eyebrow">Shuttle Bus</p>
+  <h2 class="stitle">大山崎シャトルバス</h2>
+  <p style="font-size:.72rem;color:var(--ink3);margin-bottom:1.05rem">JR山崎駅前 ⇄ 大山崎山荘美術館&ensp;所要約5分・定員13名・高齢者優先・予約不可</p>
+  <div class="sh-wrap">
+    <table class="sh-t">
+      <thead><tr><th>方向</th><th>時刻</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>山崎駅 → 美術館</td>
+          <td>
+            <span class="tp tp-n">9:50</span><span class="tp tp-n">10:10</span><span class="tp tp-n">10:30</span><span class="tp tp-n">10:50</span>
+            <span class="tp tp-n">11:10</span><span class="tp tp-n">11:30</span><span class="tp tp-n">11:50</span><span class="tp tp-n">12:10</span>
+            <span class="tp tp-n">13:50</span><span class="tp tp-go">★ 14:30</span>
+            <span class="tp tp-g2">14:50</span><span class="tp tp-g2">15:10</span>
+            <span class="tp tp-n">15:30</span><span class="tp tp-n">15:50</span><span class="tp tp-n">16:10</span>
+          </td>
+        </tr>
+        <tr>
+          <td>美術館 → 山崎駅</td>
+          <td>
+            <span class="tp tp-n">15:58</span><span class="tp tp-n">16:20</span>
+            <span class="tp tp-bk">★ 16:40</span><span class="tp tp-b2">17:00</span><span class="tp tp-b2">17:20</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sh-leg">
+    <span><div class="ld" style="background:var(--ink)"></div>目標便（行き）</span>
+    <span><div class="ld" style="background:#e0a8bc"></div>次候補（行き）</span>
+    <span><div class="ld" style="background:var(--mo)"></div>目標便（帰り）</span>
+    <span><div class="ld" style="background:#aed0a0"></div>次候補（帰り）</span>
+  </div>
+</div>
+
+<div class="stripe"></div>
+
+<!-- ════ SPOTS ════ -->
+<div class="wrap wrap--sm">
+  <p class="eyebrow">Destinations</p>
+  <h2 class="stitle">各スポット</h2>
+  <div class="sg">
+
+    <div class="sp">
+      <div class="sp-bar"></div><div class="sp-n">01</div>
+      <div class="sp-name">⛩ 北野天満宮</div>
+      <div class="sp-desc">学問の神・菅原道真を祀る全国天満宮の総本社。梅の名所として名高く、2月の梅苑公開には多くの参拝者が訪れる。毎月25日には天神市が立つ</div>
+      <div class="sp-chips"><span class="sp-chip hr">🕐 境内自由</span></div>
+      <div class="sp-meta">上京区馬喰町&ensp;公式P 約300台<br><a href="https://www.kitanotenmangu.or.jp/" target="_blank">→ 公式サイト</a></div>
+      <div class="sp-route"><b>🌸 平野神社への近道</b><br><b>北門（御前通沿い）</b>を出て西へ徒歩約3〜4分 → 平野神社の<b>東鳥居</b>に到着</div>
+    </div>
+
+    <div class="sp">
+      <div class="sp-bar"></div><div class="sp-n">02</div>
+      <div class="sp-name">🌸 平野神社</div>
+      <div class="sp-desc">60種・400本超の桜で知られる京都屈指の花見名所。珍種が多く、北野天満宮と隣接するため合わせて散策できる</div>
+      <div class="sp-chips"><span class="sp-chip hr">🕐 6:00〜17:00</span></div>
+      <div class="sp-meta">上京区西大路通一条上ル<br>北野天満宮の北門から徒歩3〜4分<br><a href="https://www.hiranojinja.com/" target="_blank">→ 公式サイト</a></div>
+    </div>
+
+    <div class="sp">
+      <div class="sp-bar"></div><div class="sp-n">03</div>
+      <div class="sp-name">🫘 中村製餡所</div>
+      <div class="sp-desc">大正元年創業100年超の餡専門店。職人手作りの粒あん・白あんを量り売りで購入でき、手土産に人気</div>
+      <div class="sp-chips"><span class="sp-chip hr">🕐 8:00〜17:00（水・日定休）</span></div>
+      <div class="sp-meta">上京区一条通御前西入大東町88<br>カード・Suica・PayPay可<br>📞 <a href="tel:075-461-4481">075-461-4481</a><br><a href="https://www.nakamura-seiansho.com/" target="_blank">→ 公式サイト</a></div>
+    </div>
+
+    <div class="sp gold">
+      <div class="sp-bar"></div><div class="sp-n">04</div>
+      <div class="sp-name">📜 鳩居堂 本店</div>
+      <div class="sp-desc">1663年創業350年超、香と和文具の老舗。お香・和紙・便箋・ぽち袋など上質な品揃えが魅力の京都本店</div>
+      <div class="sp-chips"><span class="sp-chip hr">🕐 10:00〜18:00</span></div>
+      <div class="sp-meta">中京区寺町通御池下ル<br><a href="https://www.kyukyodo.co.jp/" target="_blank">→ 公式サイト</a></div>
+    </div>
+
+    <div class="sp">
+      <div class="sp-bar"></div><div class="sp-n">05</div>
+      <div class="sp-name">🍱 懐石 近又</div>
+      <div class="sp-desc">1801年（享和元年）創業の老舗懐石料理店。国登録有形文化財の町家建築で、季節の食材を活かした京懐石をいただける</div>
+      <div class="sp-chips">
+        <span class="sp-chip hr">🕐 12:00〜（完全予約制）</span>
+        <span class="sp-chip rv">✅ 12:00 予約済</span>
+      </div>
+      <div class="sp-meta">中京区御幸町四条上ル<br>📞 <a href="tel:075-221-8813">075-221-8813</a><br><a href="https://www.kinmata.com/" target="_blank">→ 公式サイト</a></div>
+    </div>
+
+    <div class="sp moss">
+      <div class="sp-bar"></div><div class="sp-n">06</div>
+      <div class="sp-name">🖼 大山崎山荘美術館</div>
+      <div class="sp-desc">大正期の英国風山荘を転用した美術館。モネの「睡蓮」連作と、特別展「共鳴　河井寛次郎×濱田庄司」を同時に堪能できる。安藤忠雄設計の「地中の宝石箱」地中館も必見</div>
+      <div class="sp-chips"><span class="sp-chip hr">🕐 10:00〜17:00（入館16:30まで）</span></div>
+      <div class="sp-meta">乙訓郡大山崎町銭原5-3<br>駐車場なし → タイムズ山崎駅前<br><a href="https://www.asahigroup-oyamazaki.com/exhibition/kawai-hamada/" target="_blank">→ 特別展「共鳴」詳細</a><br><a href="https://www.asahigroup-oyamazaki.com/" target="_blank">→ 美術館公式サイト</a></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="stripe"></div>
+
+<!-- ════ TASKS ════ -->
+<div class="wrap wrap--sm">
+  <p class="eyebrow">To Do</p>
+  <h2 class="stitle">残タスク</h2>
+  <ul class="task-ul">
+    <li class="task-li">
+      <div class="chk" onclick="this.classList.toggle('done')"></div>
+      <div><b>前日（4/3）：</b>北野天満宮の公式Xで混雑・駐車状況を確認する</div>
+    </li>
+    <li class="task-li">
+      <div class="chk" onclick="this.classList.toggle('done')"></div>
+      <div><b>当日出発前：</b>御池地下P → 山崎ルート（府道10号）をカーナビにセット</div>
+    </li>
+  </ul>
+  <div style="margin-top:1.5rem;padding:.95rem 1.05rem;background:var(--bg2);border-radius:3px;font-size:.72rem;color:var(--ink3);line-height:1.82;border-left:2px solid var(--bdr)">
+    <b style="color:var(--ink)">📌 ルート設計の背景</b><br>
+    背割堤さくらまつり（2026/3/21〜4/12）の渋滞を完全回避するため、八幡市を一切経由しないルートを採用。御池→山崎は府道10号推奨。国道171号は完全回避。
+  </div>
+</div>
+
+<footer class="foot">
+  <strong>北の文道から手仕事の美を訪ねて　京の春を綴る　早起き二人旅 2026</strong><br>
+  <span style="margin-top:.5rem;display:block;font-size:.66rem">April 4, 2026 &ensp;·&ensp; Kyoto Day Trip &ensp;·&ensp; 勢和多気 → 京都</span>
+</footer>
+
+<script>
+/* ════ 全ページ・桜花びら Canvas ════ */
+(function(){
+  const cv  = document.getElementById('global-cv');
+  const ctx = cv.getContext('2d');
+  let W, H, mx=-999, my=-999, scrollV=0, lastSY=0;
+
+  function resize(){ W=cv.width=window.innerWidth; H=cv.height=window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  window.addEventListener('scroll',()=>{
+    const sy=window.scrollY;
+    scrollV=(sy-lastSY)*.015; scrollV=Math.max(-1.8,Math.min(1.8,scrollV)); lastSY=sy;
+  },{passive:true});
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+  window.addEventListener('mouseleave',()=>{mx=-999;my=-999});
+  window.addEventListener('touchmove',e=>{
+    const t=e.touches[0]; mx=t.clientX; my=t.clientY;
+  },{passive:true});
+  window.addEventListener('touchend',()=>{mx=-999;my=-999});
+
+  function drawPetal(cx,cy,rx,ry,rot,alpha,hue){
+    ctx.save();
+    ctx.globalAlpha=alpha;
+    ctx.translate(cx,cy);
+    ctx.rotate(rot);
+    const w=rx,h=ry;
+    const g=ctx.createRadialGradient(0,-h*.12,h*.04,0,0,h*1.05);
+    g.addColorStop(0,`hsla(${hue},80%,95%,1)`);
+    g.addColorStop(.45,`hsla(${hue},74%,87%,1)`);
+    g.addColorStop(1,`hsla(${hue},66%,80%,0.55)`);
+    ctx.beginPath();
+    ctx.moveTo(0,h);
+    ctx.bezierCurveTo(-w*1.06,h*.33,-w*1.15,-h*.23,-w*.23,-h*.83);
+    ctx.bezierCurveTo(-w*.09,-h*.97,0,-h*.90,0,-h*.88);
+    ctx.bezierCurveTo(0,-h*.93,w*.07,-h*.98,w*.20,-h*.83);
+    ctx.bezierCurveTo(w*1.09,-h*.25,w*1.03,h*.35,0,h);
+    ctx.closePath();
+    ctx.fillStyle=g; ctx.fill();
+    ctx.strokeStyle=`hsla(${hue},52%,70%,0.25)`; ctx.lineWidth=0.3; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0,h*.65); ctx.bezierCurveTo(0,h*.15,0,-h*.28,0,-h*.7);
+    ctx.strokeStyle=`hsla(${hue},52%,62%,0.18)`; ctx.lineWidth=0.4; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0,h*.08); ctx.quadraticCurveTo(-w*.36,-h*.18,-w*.54,-h*.42);
+    ctx.strokeStyle=`hsla(${hue},48%,65%,0.12)`; ctx.lineWidth=0.25; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0,h*.03); ctx.quadraticCurveTo(w*.32,-h*.20,w*.50,-h*.45);
+    ctx.strokeStyle=`hsla(${hue},48%,65%,0.12)`; ctx.lineWidth=0.25; ctx.stroke();
+    ctx.restore();
+  }
+
+  const HUES=[335,340,332,345,338,328,350,334,342];
+  function make(top){
+    const rx=1.8+Math.random()*3.0;
+    return{
+      x:Math.random()*W, y:top?-(12+Math.random()*80):Math.random()*H,
+      rx, ry:rx*(1.5+Math.random()*.3),
+      rot:Math.random()*Math.PI*2,
+      vx:-0.45+Math.random()*.9, vy:0.3+Math.random()*.5,
+      vr:(Math.random()-.5)*.038,
+      a:0.45+Math.random()*.42,
+      w:Math.random()*Math.PI*2, ws:0.01+Math.random()*.02,
+      hue:HUES[Math.random()*HUES.length|0],
+      sp:Math.random()*Math.PI*2, sa:(Math.random()-.5)*.022,
+    };
+  }
+
+  let ps=[];
+  function initP(){ const n=Math.round((W*H)/22000); ps=Array.from({length:Math.min(Math.max(n,28),72)},()=>make(false)); }
+  initP();
+  window.addEventListener('resize',()=>{resize();initP();});
+
+  let scrollDecay=0;
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    scrollDecay=scrollDecay*.85+scrollV*.15; scrollV*=.7;
+    ps.forEach(p=>{
+      p.w+=p.ws; p.sp+=.016;
+      const dx=p.x-mx,dy=p.y-my,dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<60){const f=(60-dist)/60*.32;p.vx+=(dx/dist)*f;p.vy+=(dy/dist)*f*.5;}
+      p.vx+=scrollDecay*.016; p.vx*=.98;
+      p.vy=Math.max(.22,p.vy*.998+.002);
+      p.x+=p.vx+Math.sin(p.w)*.42;
+      p.y+=p.vy+Math.sin(p.w*.55)*.1;
+      p.rot+=p.vr+Math.sin(p.sp)*p.sa;
+      drawPetal(p.x,p.y,p.rx,p.ry,p.rot,p.a,p.hue);
+      if(p.y>H+20||p.x<-50||p.x>W+50) Object.assign(p,make(true));
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ════ ヒーロー パララックス ════ */
+(function(){
+  const hero=document.getElementById('hero');
+  const tree=hero.querySelector('.h-tree');
+  const title=document.getElementById('h-title');
+  const floats=hero.querySelectorAll('.h-float');
+  let tx=0,ty=0,cx=0,cy=0;
+  function lerp(a,b,t){return a+(b-a)*t}
+  function frame(){
+    cx=lerp(cx,tx,.055); cy=lerp(cy,ty,.055);
+    const s=12;
+    if(tree)  tree.style.transform=`translate(${cx*s*.7}px,${cy*s*.4}px)`;
+    if(title) title.style.transform=`translate(calc(-50% + ${-cx*s*.18}px),calc(-50% + ${-cy*s*.14}px))`;
+    floats.forEach((f,i)=>{const d=i%2===0?1:-1;f.style.transform=`translate(${cx*s*.28*d}px,${cy*s*.22*d}px)`;});
+    requestAnimationFrame(frame);
+  }
+  frame();
+  hero.addEventListener('mousemove',e=>{const r=hero.getBoundingClientRect();tx=(e.clientX-r.left)/r.width*2-1;ty=(e.clientY-r.top)/r.height*2-1;});
+  hero.addEventListener('mouseleave',()=>{tx=0;ty=0;});
+  hero.addEventListener('touchmove',e=>{const t=e.touches[0],r=hero.getBoundingClientRect();tx=(t.clientX-r.left)/r.width*2-1;ty=(t.clientY-r.top)/r.height*2-1;},{passive:true});
+  hero.addEventListener('touchend',()=>{tx=0;ty=0;});
+})();
+
+/* ════ Scroll Reveal ════ */
+(function(){
+  const ro=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.style.animation='rise .5s cubic-bezier(.14,.84,.38,1) both';ro.unobserve(e.target);}});
+  },{threshold:.07});
+  document.querySelectorAll('.tl-row,.sp,.ic,.task-li').forEach(el=>ro.observe(el));
+})();
+</script>
+</body>
+</html>
