@@ -233,6 +233,20 @@ body{
 }
 .route-hint b{ color:#2e4020; }
 
+/* Googleマップボタン */
+.map-btn{
+  display:inline-flex; align-items:center; gap:.4rem;
+  margin-top:.5rem; padding:.52rem 1rem;
+  background:var(--mo); color:#fff !important;
+  border-radius:4px; font-size:.72rem; font-weight:600;
+  letter-spacing:.04em; text-decoration:none !important;
+  border:none; cursor:pointer;
+  -webkit-tap-highlight-color:rgba(0,0,0,.12);
+  transition:opacity .18s;
+}
+.map-btn:hover,.map-btn:active{ opacity:.82; }
+.map-btn::before{ content:'📍'; font-size:.82rem; }
+
 .tags{ display:flex; flex-wrap:wrap; gap:.26rem; margin-top:.42rem; }
 .tag{
   font-size:.63rem; font-weight:600; letter-spacing:.04em;
@@ -508,7 +522,9 @@ body{
       <div class="tl-t">07:10</div>
       <div class="tl-c">
         <div class="tl-n">🚗 勢和多気IC &ensp;出発</div>
-        <div class="tl-d">紀勢道 → 伊勢道 → 東名阪 → 亀山JCT → 新名神 → 名神</div>
+        <div class="tl-d">紀勢道 → 伊勢道 → 東名阪 → 亀山JCT → 新名神 → 名神 → <b>京都東IC</b><br>市内：五条通 → <b>堀川五条（右折）</b> → 堀川通を北上 → <b>堀川今出川（左折）</b> → 今出川通を西進 → 北野天満宮</div>
+        <div class="route-hint">🗺 市内ルート：五条通→堀川五条→堀川通→堀川今出川→今出川通→北野天満宮</div>
+        <a class="map-btn" href="https://maps.app.goo.gl/ZJjdQaoDUZ1QQdWj9" target="_blank">勢和多気IC → 北野天満宮</a>
       </div>
     </div>
 
@@ -539,7 +555,9 @@ body{
       <div class="tl-t">10:10</div>
       <div class="tl-c">
         <div class="tl-n">🚗 北野 出発 → 御池地下P 入庫</div>
-        <div class="tl-d">西大路通 → 四条 → 御池通 → <b>西入口</b>から入庫（B1 中央・ゼスト側東寄りが徒歩移動に便利）</div>
+        <div class="tl-d">天満宮出口（<b>右折</b>）→ 北野白梅町（<b>左折</b>）→ <b>西大路通を南下</b> → 西大路御池（<b>左折</b>）→ 御池通を東進 → <b>西口</b>（左車線側・左折入庫）<br>B1中央＝東寄り・ゼスト側を目指す</div>
+        <div class="route-hint">🗺 ルート：北野白梅町→西大路通→西大路御池→御池通東進→西口</div>
+        <a class="map-btn" href="https://maps.app.goo.gl/gkyyJfAAwEmFZ3p67" target="_blank">北野天満宮 → 御池地下P</a>
       </div>
     </div>
 
@@ -556,7 +574,7 @@ body{
       <div class="tl-t">11:40<small>─ 12:00</small></div>
       <div class="tl-c">
         <div class="tl-n">🚶 鳩居堂 → 近又へ徒歩移動</div>
-        <div class="tl-d">寺町通を南下 → 御幸町通を北上&ensp;約10分</div>
+        <div class="tl-d">寺町通を南下 → 三条通を右（西）へ → 御幸町通を南下&ensp;約10分</div>
       </div>
     </div>
 
@@ -587,8 +605,9 @@ body{
       <div class="tl-t">13:45</div>
       <div class="tl-c">
         <div class="tl-n">🚗 御池地下P 出発 → 大山崎へ</div>
-        <div class="tl-d">西出口スロープ → 御池通<b>中央分離帯付近</b>に浮上・西向き車線に合流 → <b>そのまま直進</b>（右折NG）→ 堀川御池交差点 → 堀川通南下 → 府道10号<br><b>国道171号 完全回避</b></div>
-        <div class="route-hint">🗺 <b>ナビ設定：</b>経由地に「<b>堀川五条駅</b>」を追加 → 堀川通ルートを確実に誘導</div>
+        <div class="tl-d">西出口 → 御池通<b>西向き直進</b> → <b>烏丸通または河原町通を南下</b> → 上鳥羽入口から<b>京都高速（鴨川線）</b>へ → <b>久御山JCT（京滋バイパス・吹田方面）</b> → 大山崎IC → JR山崎駅<br><b>背割堤・国道171号 完全回避</b></div>
+        <div class="route-hint">🗺 ルート：御池通西進→上鳥羽→京都高速→久御山JCT（吹田方面）→大山崎IC</div>
+        <a class="map-btn" href="https://maps.app.goo.gl/JAJhJvTMaze6szZ96" target="_blank">御池地下P → JR山崎駅</a>
       </div>
     </div>
 
@@ -631,7 +650,7 @@ body{
       <div class="tl-t">17:00</div>
       <div class="tl-c">
         <div class="tl-n">🚗 大山崎IC 出発・帰路</div>
-        <div class="tl-d">大山崎IC → 名神 → 新名神 → 伊勢道 → 紀勢道</div>
+        <div class="tl-d">大山崎IC → <b>京滋バイパス（宇治・名古屋・第2京阪方面）</b> → 瀬田東JCT → 新名神 → 伊勢道 → 紀勢道</div>
       </div>
     </div>
 
@@ -651,12 +670,13 @@ body{
   <h2 class="stitle">御池地下駐車場</h2>
   <div class="ic-stack parking-section">
     <div class="ic">
-      <div class="ic-hd"><div class="ic-dot"></div>入庫</div>
+      <div class="ic-hd"><div class="ic-dot"></div>入庫（入口3か所）</div>
       <div class="ic-bd">
-        <div class="ic-row"><span class="ic-lbl">入口</span><span>御池通を<b>東向き</b>に走行 → 烏丸交差点から2つ目の信号を左（<b>西入口</b>）</span></div>
-        <div class="ic-row"><span class="ic-lbl">入口の構造</span><span>スロープは<b>御池通の中央分離帯側</b>に設置。入口手前から<b>右側（中央分離帯寄り）の車線</b>に移っておくこと。左端車線のままだと急な車線変更が必要になる</span></div>
+        <div class="ic-row"><span class="ic-lbl">西入口 ★今回</span><span>烏丸方面から御池通を<b>東向き</b>に走行 → 2つ目の信号（高倉通付近）<b>左車線側</b>。バイクはこの入口のみ</span></div>
+        <div class="ic-row"><span class="ic-lbl">中央入口</span><span>河原町方面から御池通を<b>東→西向き</b>に走行 → 2つ目の信号（麩屋町通付近）<b>左車線側</b></span></div>
+        <div class="ic-row"><span class="ic-lbl">東入口</span><span>川端方面から御池通を<b>東→西向き</b>に走行 → 河原町手前（木屋町通付近）<b>右車線（中央分離帯側）</b></span></div>
         <div class="ic-row"><span class="ic-lbl">駐車位置 B1</span><span><b>中央エリア＝東寄り・ゼスト側</b>を目指す。地上への徒歩移動に便利</span></div>
-        <div class="ic-row"><span class="ic-lbl">駐車位置 B2</span><span>B1中央（東寄り・ゼスト側）が埋まっていたらB2へ。<b>紫〜オレンジゾーンの間・管理事務所付近の中央エリア</b>に停めると地上階段に近く移動がスムーズ</span></div>
+        <div class="ic-row"><span class="ic-lbl">駐車位置 B2</span><span>B1中央（東寄り・ゼスト側）が埋まっていたらB2へ。<b>紫〜オレンジゾーンの間・管理事務所付近の中央エリア</b>に停めると地上階段に近い</span></div>
         <div class="ic-row"><span class="ic-lbl">サイズ制限</span><span>車高 2.1m ／ 車幅 2.0m ／ 車長 5.0m 以内</span></div>
       </div>
     </div>
@@ -673,19 +693,18 @@ body{
       <div class="ic-hd"><div class="ic-dot"></div>地上への出方（徒歩）</div>
       <div class="ic-bd">
         <div class="ic-row"><span class="ic-lbl">鳩居堂へ</span><span>地下街（ゼスト御池）<b>東端の出口・階段</b>から地上へ → 寺町通すぐ</span></div>
-        <div class="ic-row"><span class="ic-lbl">近又へ</span><span>鳩居堂から寺町通を南下 → 御幸町通へ 徒歩約10分（駐車場には戻らず直行）</span></div>
+        <div class="ic-row"><span class="ic-lbl">近又へ</span><span>鳩居堂から寺町通を南下 → 三条通を右（西）へ → 御幸町通を南下 徒歩約10分（駐車場には戻らず直行）</span></div>
         <div class="ic-note">迷ったら地下街内の「御幸町通」「寺町通」の案内板を目印に。</div>
       </div>
     </div>
     <div class="ic">
-      <div class="ic-hd"><div class="ic-dot"></div>出庫（山崎方面）</div>
+      <div class="ic-hd"><div class="ic-dot"></div>出庫（出口2か所）</div>
       <div class="ic-bd">
         <div class="ic-row"><span class="ic-lbl">精算</span><span>近又から戻り、場内の事前精算機で支払い → <b>15分以内</b>に出庫</span></div>
-        <div class="ic-row"><span class="ic-lbl">出口の構造</span><span>スロープは<b>御池通の中央分離帯付近</b>に浮上。出た直後は御池通の<b>右側車線（西向き）に自動合流</b>する構造のため、右折は不可</span></div>
-        <div class="ic-row"><span class="ic-lbl">出口</span><span>「<b>西出口（堀川方面）</b>」の看板に従い、スロープ後<b>直進</b>（右折NG）</span></div>
-        <div class="ic-row"><span class="ic-lbl">ルート</span><span>御池通を<b>西向きにそのまま直進</b> → 堀川御池交差点 → 堀川通南下 → 府道10号 → 大山崎（171号回避）</span></div>
-        <div class="ic-row"><span class="ic-lbl">ナビ設定</span><span>経由地に「<b>堀川五条駅</b>」を追加 → 烏丸・四条エリアを迂回して堀川通ルートに誘導</span></div>
-
+        <div class="ic-row"><span class="ic-lbl">西出口 ★今回</span><span>間之町通付近に浮上 → 御池通<b>西向き車線</b>に自動合流（右折不可）→ そのまま堀川方面へ直進</span></div>
+        <div class="ic-row"><span class="ic-lbl">東出口</span><span>木屋町通付近に浮上 → 御池通<b>東向き（鴨川方面）</b>に合流</span></div>
+        <div class="ic-row"><span class="ic-lbl">ルート</span><span>西出口 → 御池通<b>西向き直進</b> → 烏丸通または河原町通を南下 → 上鳥羽入口から<b>京都高速（鴨川線）</b> → <b>久御山JCT（京滋バイパス・吹田方面）</b> → 大山崎IC（171号・背割堤回避）</span></div>
+        <div class="ic-row"><span class="ic-lbl">ナビ設定</span><span>上鳥羽入口を経由地に設定して京都高速ルートに誘導</span></div>
       </div>
     </div>
   </div>
@@ -806,12 +825,12 @@ body{
     </li>
     <li class="task-li">
       <div class="chk" onclick="this.classList.toggle('done')"></div>
-      <div><b>当日出発前：</b>御池地下P → 山崎ルートをカーナビにセット。経由地に「<b>堀川五条駅</b>」を追加して堀川通ルートを確定させる</div>
+      <div><b>当日出発前：</b>御池地下P → 山崎ルートをカーナビにセット。上鳥羽入口を経由地に設定して京都高速（鴨川線）ルートに誘導</div>
     </li>
   </ul>
   <div style="margin-top:1.5rem;padding:.95rem 1.05rem;background:var(--bg2);border-radius:3px;font-size:.72rem;color:var(--ink3);line-height:1.82;border-left:2px solid var(--bdr)">
     <b style="color:var(--ink)">📌 ルート設計の背景</b><br>
-    背割堤さくらまつり（2026/3/21〜4/12）の渋滞を完全回避するため、八幡市を一切経由しないルートを採用。御池→山崎は府道10号推奨。国道171号は完全回避。
+    背割堤さくらまつり（2026/3/21〜4/12）の渋滞を完全回避するため、八幡市を一切経由しないルートを採用。御池出口から烏丸通・河原町通南下→上鳥羽→京都高速（鴨川線）→久御山JCT（京滋バイパス吹田方面）→大山崎IC。国道171号は完全回避。大型SUVを考慮し、往路は堀川通・今出川通の広い幹線道路を使用。
   </div>
 </div>
 
