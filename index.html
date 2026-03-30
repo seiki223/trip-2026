@@ -814,11 +814,43 @@ body{
 
 <div class="stripe"></div>
 
+<!-- ════ WEATHER ════ -->
+<div class="wrap wrap--sm">
+  <p class="eyebrow">Weather Forecast</p>
+  <h2 class="stitle">当日の天気予報</h2>
+  <div class="ic-stack">
+    <div class="ic">
+      <div class="ic-hd"><div class="ic-dot" style="background:var(--sk)"></div>京都市 4月4日（土）の天気を確認</div>
+      <div class="ic-bd">
+        <div class="ic-row">
+          <span class="ic-lbl">tenki.jp</span>
+          <span><a href="https://tenki.jp/forecast/6/30/6100/26100/" target="_blank">🌤 京都市の天気予報（10日間）</a></span>
+        </div>
+        <div class="ic-row">
+          <span class="ic-lbl">Yahoo!天気</span>
+          <span><a href="https://weather.yahoo.co.jp/weather/jp/26/6100.html" target="_blank">🌂 京都府の天気（Yahoo!）</a></span>
+        </div>
+        <div class="ic-row">
+          <span class="ic-lbl">気象庁</span>
+          <span><a href="https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=260000" target="_blank">📡 京都府の天気（気象庁公式）</a></span>
+        </div>
+        <div class="ic-note">⚠️ 雨天・強風の場合、シャトルバスの混雑増・大山崎山荘の庭園見学に影響あり。折りたたみ傘は必携。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stripe"></div>
+
 <!-- ════ TASKS ════ -->
 <div class="wrap wrap--sm">
   <p class="eyebrow">To Do</p>
   <h2 class="stitle">残タスク</h2>
   <ul class="task-ul">
+    <li class="task-li">
+      <div class="chk" onclick="this.classList.toggle('done')"></div>
+      <div><b>前日（4/3）：</b>京都の天気予報を確認する（<a href="https://tenki.jp/forecast/6/30/6100/26100/" target="_blank" style="color:var(--skd);border-bottom:1px dashed rgba(168,96,128,.28)">tenki.jp</a> / <a href="https://weather.yahoo.co.jp/weather/jp/26/6100.html" target="_blank" style="color:var(--skd);border-bottom:1px dashed rgba(168,96,128,.28)">Yahoo!天気</a>）。雨なら折りたたみ傘・レインコートを準備</div>
+    </li>
     <li class="task-li">
       <div class="chk" onclick="this.classList.toggle('done')"></div>
       <div><b>前日（4/3）：</b>北野天満宮の公式Xで混雑・駐車状況を確認する</div>
@@ -908,7 +940,26 @@ body{
   let ps=[];
   function initP(){ const n=Math.round((W*H)/22000); ps=Array.from({length:Math.min(Math.max(n,28),72)},()=>make(false)); }
   initP();
-  window.addEventListener('resize',()=>{resize();initP();});
+
+  /* ─ 小雨 ─ */
+  function makeRain(){
+    return{
+      x:Math.random()*W, y:-(6+Math.random()*H),
+      len:14+Math.random()*16,
+      vx:-0.55+Math.random()*0.25,
+      vy:5.5+Math.random()*3.5,
+      a:0.11+Math.random()*0.16
+    };
+  }
+  let rain=[];
+  function initRain(){
+    const n=Math.round((W*H)/12000);
+    rain=Array.from({length:Math.min(Math.max(n,25),50)},()=>{
+      const r=makeRain(); r.y=Math.random()*H; return r;
+    });
+  }
+  initRain();
+  window.addEventListener('resize',()=>{resize();initP();initRain();});
 
   let scrollDecay=0;
   function tick(){
@@ -925,6 +976,21 @@ body{
       p.rot+=p.vr+Math.sin(p.sp)*p.sa;
       drawPetal(p.x,p.y,p.rx,p.ry,p.rot,p.a,p.hue);
       if(p.y>H+20||p.x<-50||p.x>W+50) Object.assign(p,make(true));
+    });
+    /* ─ 小雨描画（花びらの手前） ─ */
+    rain.forEach(r=>{
+      r.x+=r.vx; r.y+=r.vy;
+      ctx.save();
+      ctx.globalAlpha=r.a;
+      ctx.strokeStyle='rgba(172,192,218,1)';
+      ctx.lineWidth=1.1;
+      ctx.lineCap='round';
+      ctx.beginPath();
+      ctx.moveTo(r.x,r.y);
+      ctx.lineTo(r.x-r.vx*3.2,r.y-r.len);
+      ctx.stroke();
+      ctx.restore();
+      if(r.y>H+16) Object.assign(r,makeRain());
     });
     requestAnimationFrame(tick);
   }
