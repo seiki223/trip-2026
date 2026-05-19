@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>おでかけ展覧会リスト 2026（多気町発・車）</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic UI','Noto Sans JP',sans-serif;font-size:13px;background:#f5f3ee;color:#1a1a1a;padding:14px 10px}
+h1{font-size:15px;font-weight:700;margin-bottom:3px}
+.subtitle{font-size:11px;color:#999;margin-bottom:6px}
+
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;font-size:10px}
+.leg{display:flex;align-items:center;gap:4px;color:#555}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+.section{margin-bottom:14px;background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e6e2d8}
+.area-header{display:flex;align-items:center;gap:8px;background:#f0ede5;padding:6px 12px;border-bottom:1px solid #e6e2d8;flex-wrap:wrap}
+.area-name{font-size:11px;font-weight:700;letter-spacing:.06em;color:#555;flex:1;white-space:nowrap}
+.pref{font-size:10px;color:#888;background:#e4e0d6;border-radius:10px;padding:1px 8px;white-space:nowrap}
+
+table{width:100%;border-collapse:collapse}
+td{padding:7px 10px;vertical-align:top;border-bottom:1px solid #f0ece3}
+tr:last-child td{border-bottom:none}
+.cv{width:118px}
+.ctime{width:92px}
+.ct{width:auto}
+.cp{width:76px}
+.cs{width:66px}
+
+/* 同日グループ色（行背景） */
+tr.g-arashiyama td{background:#fff8f3}
+tr.g-arashiyama td:first-child{border-left:4px solid #e07b3a}
+tr.g-okazaki    td{background:#f8f5ff}
+tr.g-okazaki    td:first-child{border-left:4px solid #7b5ea7}
+tr.g-nakanoshima td{background:#f3f7ff}
+tr.g-nakanoshima td:first-child{border-left:4px solid #2e7ec9}
+tr.g-osaka-namba td{background:#f3fbf6}
+tr.g-osaka-namba td:first-child{border-left:4px solid #2a9a5c}
+tr.g-tamba      td{background:#fdf8f0}
+tr.g-tamba      td:first-child{border-left:4px solid #c0882a}
+tr.g-nagoya     td{background:#fdf3f5}
+tr.g-nagoya     td:first-child{border-left:4px solid #b03050}
+tr.g-ichinokura td{background:#f2fbfc}
+tr.g-ichinokura td:first-child{border-left:4px solid #3a9aaa}
+
+.vname{font-size:12px;color:#333;font-weight:600;line-height:1.4}
+.vloc{font-size:10px;color:#bbb;margin-top:1px}
+.near{font-size:10px;margin-top:1px}
+
+.drivebox{background:#f5f3ee;border-radius:6px;padding:4px 7px}
+.dtime{font-size:13px;font-weight:700;color:#444}
+.droute{font-size:9px;color:#aaa;margin-top:2px;line-height:1.5}
+
+.ttl{font-size:13px;color:#1a1a1a;font-weight:700;line-height:1.4}
+.sub{font-size:11px;color:#999;margin-top:2px;line-height:1.4}
+.mingei{font-size:10px;font-weight:600;color:#8b5a2b;background:#fdf3e7;border:1px solid #e8d5b0;border-radius:8px;padding:1px 7px;margin-top:4px;display:inline-block}
+.michelin{font-size:10px;font-weight:700;color:#c8102e;background:#fff0f2;border:1px solid #f0b8c0;border-radius:8px;padding:1px 7px;margin-top:4px;display:inline-block}
+.link{display:inline-flex;align-items:center;gap:2px;font-size:10px;color:#4a80c4;text-decoration:none;margin-top:4px;border:1px solid #c0d4ee;border-radius:10px;padding:1px 8px;background:#f0f5fc}
+.link:hover{background:#dce9f7}
+
+.per{font-size:12px;color:#555;line-height:1.6}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;line-height:1.4}
+.now{background:#e2f5ea;color:#1e7a40}
+.end{background:#fde8e8;color:#c0392b}
+.soon{background:#fef6dc;color:#9a6200}
+.fut{background:#e8e8e8;color:#888;font-weight:500}
+.futwinter{background:#e0e0e0;color:#777;font-weight:500}
+.perm{background:#deeeff;color:#2060a0}
+
+.note{font-size:11px;color:#aaa;padding:10px 12px;background:#f9f7f2;border-top:1px solid #e6e2d8;line-height:1.9}
+.note-mingei{font-size:11px;color:#8b5a2b;background:#fdf3e7;border:1px solid #e8d5b0;border-radius:8px;padding:8px 12px;margin-bottom:10px;line-height:1.8}
+</style>
+</head>
+<body>
+
+<h1>おでかけ展覧会リスト 2026</h1>
+<p class="subtitle">🚗 多気IC（伊勢自動車道）発・高速利用の所要時間目安　※交通状況により前後します</p>
+
+<div class="legend">
+  <span class="leg"><span class="leg-dot" style="background:#e2f5ea;border:1px solid #1e7a40"></span>開催中</span>
+  <span class="leg"><span class="leg-dot" style="background:#fde8e8;border:1px solid #c0392b"></span>〆切（5月末まで）</span>
+  <span class="leg"><span class="leg-dot" style="background:#fef6dc;border:1px solid #9a6200"></span>もうすぐ開幕</span>
+  <span class="leg"><span class="leg-dot" style="background:#e8e8e8;border:1px solid #aaa"></span>夏〜秋（参考）</span>
+  <span class="leg"><span class="leg-dot" style="background:#deeeff;border:1px solid #2060a0"></span>常設</span>
+  <span class="leg">｜</span>
+  <span class="leg"><span class="leg-dot" style="background:#e07b3a"></span>嵐山セット</span>
+  <span class="leg"><span class="leg-dot" style="background:#7b5ea7"></span>岡崎セット</span>
+  <span class="leg"><span class="leg-dot" style="background:#2e7ec9"></span>中之島セット</span>
+  <span class="leg"><span class="leg-dot" style="background:#2a9a5c"></span>大阪南ルート</span>
+  <span class="leg"><span class="leg-dot" style="background:#c0882a"></span>丹波篠山セット</span>
+  <span class="leg"><span class="leg-dot" style="background:#b03050"></span>名古屋圏</span>
+  <span class="leg"><span class="leg-dot" style="background:#3a9aaa"></span>市之倉セット</span>
+</div>
+
+<div class="note-mingei">
+  🪴 民藝運動の主要人物が出展されている展覧会：<br>
+  <b>濱田庄司</b> → 東洋陶磁美術館（49件）・大阪日本民芸館（常設）<br>
+  <b>河井寬次郎</b> → 東洋陶磁美術館・大阪日本民芸館（常設）<br>
+  <b>芹沢銈介</b> → 静岡市立芹沢銈介美術館・豊田市民芸館・大阪日本民芸館（常設）<br>
+  <b>棟方志功</b> → 大阪日本民芸館（常設）<br>
+  <b>吉田璋也</b> → 岐阜県現代陶芸美術館（7月〜）
+</div>
+
+<!-- ===== 滋賀 ===== -->
+<div class="section">
+  <div class="area-header">
+    <span class="area-name">滋賀・信楽エリア</span>
+    <span class="pref">滋賀県</span>
+  </div>
+  <table>
+    <tr>
+      <td class="cv"><div class="vname">滋賀県立陶芸の森</div><div class="vloc">甲賀市信楽町</div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約1h50分</div><div class="droute">伊勢道 ＞ 新名神（信楽IC）</div></div></td>
+      <td class="ct">
+        <div class="ttl">神山清子展 — 炎との対話から 私の自然釉</div>
+        <div class="sub">「スカーレット」モデル・没後初の本格回顧展。現在休館中 → 6/13開幕</div>
+        <a class="link" href="https://www.sccp.jp/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">6/13<br>— 8/30</div></td>
+      <td class="cs"><span class="badge soon">もうすぐ</span></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ===== 京都 ===== -->
+<div class="section">
+  <div class="area-header">
+    <span class="area-name">京都市内エリア</span>
+    <span class="pref">京都府</span>
+  </div>
+  <table>
+    <tr class="g-okazaki">
+      <td class="cv"><div class="vname">京都市京セラ美術館</div><div class="vloc">左京区・岡崎</div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h20分</div><div class="droute">伊勢道 ＞ 新名神 ＞ 名神（京都東IC）</div></div></td>
+      <td class="ct">
+        <div class="ttl">西洋絵画400年の旅 — 珠玉の東京富士美術館コレクション</div>
+        <div class="sub">モネ《睡蓮》・ルノワール・ゴッホ・シャガール〜ヴァン・ダイクまで80点超。ルネサンスから近代まで400年を一望</div>
+        <a class="link" href="https://kyotocity-kyocera.museum/exhibition/20260320-20260524" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">3/20<br>— 5/24</div></td>
+      <td class="cs"><span class="badge end">〆切</span></td>
+    </tr>
+    <tr class="g-okazaki">
+      <td class="cv"><div class="vname">泉屋博古館</div><div class="vloc">左京区・岡崎<div class="near" style="color:#7b5ea7">↑ 京セラ美術館から徒歩5分</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h25分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">文化財よ、永遠に2026</div>
+        <div class="sub">住友財団35年分の文化財修復成果展。中国青銅器展も同時開催</div>
+        <a class="link" href="https://sen-oku.or.jp/program/202604_newlifefortimelessart/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">4/4<br>— 6/28</div></td>
+      <td class="cs"><span class="badge now">開催中</span></td>
+    </tr>
+    <tr class="g-okazaki">
+      <td class="cv"><div class="vname">京都国立近代美術館</div><div class="vloc">左京区・岡崎<div class="near" style="color:#7b5ea7">↑ 徒歩10分</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h20分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">フォンタネージ — イタリアの光・心の風景</div>
+        <div class="sub">日伊国交160周年・来日150周年記念。浅井忠ら門下生作品も</div>
+        <a class="link" href="https://www.momak.go.jp/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">7/18<br>— 10/4</div></td>
+      <td class="cs"><span class="badge fut">夏〜秋</span></td>
+    </tr>
+    <tr>
+      <td class="cv"><div class="vname">美術館「えき」KYOTO</div><div class="vloc">下京区・京都駅ビル直結</div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h30分</div><div class="droute">伊勢道 ＞ 新名神 ＞ 名神（京都南IC）</div></div></td>
+      <td class="ct">
+        <div class="ttl">エドワード・ゴーリー 秘密のメッセージ展</div>
+        <div class="sub">絵本原画・未発行作品・ポスターなど</div>
+        <a class="link" href="https://www.mistore.jp/store/kyoto/museum.html" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">5/15<br>— 6/21</div></td>
+      <td class="cs"><span class="badge now">開催中</span></td>
+    </tr>
+    <tr class="g-arashiyama">
+      <td class="cv"><div class="vname">嵯峨嵐山文華館</div><div class="vloc">右京区・嵐山</div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h45分</div><div class="droute">伊勢道 ＞ 新名神 ＞ 名神 ＞ 京都縦貫道（大山崎JCT）</div></div></td>
+      <td class="ct">
+        <div class="ttl">それいけ！応挙塾</div>
+        <div class="sub">円山応挙・長沢芦雪・矢野夜潮ほか 約40点（展示替えあり）</div>
+        <a class="link" href="https://www.samac.jp/exhibition/detail.php?id=69" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">4/25<br>— 9/27</div></td>
+      <td class="cs"><span class="badge now">開催中</span></td>
+    </tr>
+    <tr class="g-arashiyama">
+      <td class="cv"><div class="vname">福田美術館</div><div class="vloc">右京区・嵐山<div class="near" style="color:#e07b3a">↑ 徒歩5分・共通割引</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h45分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">若冲にトリハダ！野菜もウリ！</div>
+        <div class="sub">《果蔬図巻》里帰り・《老松白鶴図》初公開</div>
+        <a class="link" href="https://fukuda-art-museum.jp/exhibition/202512264487" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">4/25<br>— 7/5</div></td>
+      <td class="cs"><span class="badge now">開催中</span></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ===== 大阪 ===== -->
+<div class="section">
+  <div class="area-header">
+    <span class="area-name">大阪エリア</span>
+    <span class="pref">大阪府</span>
+  </div>
+  <table>
+    <tr class="g-nakanoshima">
+      <td class="cv"><div class="vname">グラングリーン大阪 VS.</div><div class="vloc">北区・うめきた公園<div class="near" style="color:#2e7ec9">↑ 中之島から車5分</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h15分</div><div class="droute">伊勢道 ＞ 名阪国道 ＞ 西名阪 ＞ 阪神高速</div></div></td>
+      <td class="ct">
+        <div class="ttl">ガウディ没後100年公式事業 NAKED meets ガウディ展</div>
+        <div class="sub">ガウディ財団公認・世界初公開の手記・書簡・制作道具。サグラダ・ファミリアのイマーシブ体験。東京で17万人動員。平日10:00〜20:00・土日祝9:30〜19:30</div>
+        <a class="link" href="https://meets.naked.works/gaudi/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">4/17<br>— 6/15</div></td>
+      <td class="cs"><span class="badge now">開催中</span></td>
+    </tr>
+    <tr class="g-nakanoshima">
+      <td class="cv"><div class="vname">大阪中之島美術館</div><div class="vloc">北区・中之島<div class="near" style="color:#2e7ec9">↑ ガウディ展から車5分</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h20分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">★ フェルメール《真珠の耳飾りの少女》展</div>
+        <div class="sub">17世紀オランダ絵画の名品、奇跡の再来日。《ディアナとニンフたち》も同時来日。<b>大阪のみ・他地域巡回なし・おそらく最後の来日。</b>チケットは6月発売予定</div>
+        <a class="link" href="https://vermeer2026.exhibit.jp/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">8/21<br>— 9/27</div></td>
+      <td class="cs"><span class="badge fut">夏〜秋</span></td>
+    </tr>
+    <tr class="g-nakanoshima">
+      <td class="cv"><div class="vname">大阪市立東洋陶磁美術館</div><div class="vloc">北区・中之島<div class="near" style="color:#2e7ec9">↑ 徒歩10分</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h20分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">MOCOコレクション オムニバス PART２</div>
+        <div class="sub">堀尾幹雄コレクション・濱田庄司49件一堂公開（青釉白黒流掛大鉢ほか）。河井寬次郎・古伊万里・古染付・朝鮮水滴も。6/13「民藝ってなに？」講座あり</div>
+        <div class="mingei">🪴 民藝：濱田庄司・河井寬次郎</div>
+        <a class="link" href="https://www.moco.or.jp/exhibition/schedule/?e=659" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">4/11<br>— 8/2</div></td>
+      <td class="cs"><span class="badge now">開催中</span></td>
+    </tr>
+    <tr class="g-osaka-namba">
+      <td class="cv"><div class="vname">あべのハルカス美術館</div><div class="vloc">阿倍野区・天王寺</div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h20分</div><div class="droute">伊勢道 ＞ 名阪国道 ＞ 西名阪 ＞ 阪神高速</div></div></td>
+      <td class="ct">
+        <div class="ttl">ゴッホの跳ね橋と印象派の画家たち</div>
+        <div class="sub">ヴァルラフ＝リヒャルツ美術館蔵。マネ・モネ・セザンヌほか70点</div>
+        <a class="link" href="https://www.ktv.jp/event/gogh_hanebashi/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">7/4<br>— 9/9</div></td>
+      <td class="cs"><span class="badge fut">夏〜秋</span></td>
+    </tr>
+    <tr class="g-osaka-namba">
+      <td class="cv"><div class="vname">あべのハルカス美術館</div><div class="vloc">阿倍野区・天王寺<div class="near" style="color:#2a9a5c">↑ ゴッホ展終了後・同会場</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h20分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">アンドリュー・ワイエス展（豊田市美術館からの巡回）</div>
+        <div class="sub">米国の国民的画家。東京→豊田（7/18〜9/23）→大阪の3会場巡回</div>
+        <a class="link" href="https://www.museum.toyota.aichi.jp/" target="_blank">↗ 豊田公式（詳細後日）</a>
+      </td>
+      <td class="cp"><div class="per">10/3〜<br>12月頃</div></td>
+      <td class="cs"><span class="badge futwinter">秋〜冬</span></td>
+    </tr>
+    <tr class="g-osaka-namba">
+      <td class="cv"><div class="vname">山王美術館</div><div class="vloc">城東区・京橋OBP<div class="near" style="color:#2a9a5c">↑ ハルカスと同日検討可</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h25分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">生誕185年 ルノワール展</div>
+        <div class="sub">所蔵51点全公開・うち12点初展示。次展は岸田劉生（9/3〜）</div>
+        <a class="link" href="https://www.sannoumuseum.com/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">3/1<br>— 7/31</div></td>
+      <td class="cs"><span class="badge now">開催中</span></td>
+    </tr>
+    <tr>
+      <td class="cv"><div class="vname">大阪日本民芸館</div><div class="vloc">吹田市・万博記念公園<div class="vloc">※名神ルート・別日推奨</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h40分</div><div class="droute">伊勢道 ＞ 新名神 ＞ 名神（吹田IC）</div></div></td>
+      <td class="ct">
+        <div class="ttl">眼のわざ 手のわざ</div>
+        <div class="sub">山本教行・西洋工芸コレクション。濱田・芹沢・棟方コレクション常設</div>
+        <div class="mingei">🪴 民藝：濱田庄司・芹沢銈介・棟方志功（常設）</div>
+        <a class="link" href="https://www.mingeikan-osaka.or.jp/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">3/14<br>— 7/14</div></td>
+      <td class="cs"><span class="badge now">開催中</span></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ===== 愛知・岐阜（名古屋圏） ===== -->
+<div class="section">
+  <div class="area-header">
+    <span class="area-name">愛知・岐阜エリア</span>
+    <span class="pref">愛知県・岐阜県</span>
+  </div>
+  <table>
+    <tr class="g-nagoya">
+      <td class="cv"><div class="vname">豊田市民芸館</div><div class="vloc">豊田市平戸橋町</div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h05分</div><div class="droute">伊勢道 ＞ 伊勢湾岸道 ＞ 東海環状道（豊田勘八IC）</div></div></td>
+      <td class="ct">
+        <div class="ttl">ふたつのコレクション展「芹沢銈介の仕事」</div>
+        <div class="sub">芹沢銈介 ＋ 杉本健吉・本多静雄の交流。本多記念民芸の森も隣接</div>
+        <div class="mingei">🪴 民藝：芹沢銈介</div>
+        <a class="link" href="https://www.mingeikan.toyota.aichi.jp/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">2/7<br>— 5/24</div></td>
+      <td class="cs"><span class="badge end">〆切</span></td>
+    </tr>
+    <tr class="g-nagoya">
+      <td class="cv"><div class="vname">豊田市美術館</div><div class="vloc">豊田市小坂本町<div class="near" style="color:#b03050">↑ 民芸館から車20分</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h05分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">アンドリュー・ワイエス展</div>
+        <div class="sub">米国の国民的画家。繊細な写実描写。谷口吉生設計の建築も見どころ。→ あべのハルカスへ巡回（10/3〜）</div>
+        <a class="link" href="https://www.museum.toyota.aichi.jp/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">7/18<br>— 9/23</div></td>
+      <td class="cs"><span class="badge fut">夏〜秋</span></td>
+    </tr>
+    <tr class="g-ichinokura">
+      <td class="cv"><div class="vname">市之倉さかづき美術館</div><div class="vloc">多治見市市之倉町</div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h15分</div><div class="droute">伊勢道 ＞ 東名阪 ＞ 名二環 ＞ 中央道（多治見IC）→15分</div></div></td>
+      <td class="ct">
+        <div class="ttl">盃約1500点・巨匠館常設</div>
+        <div class="sub">幕末〜昭和の盃を中心に展示。荒川豊蔵・加藤唐九郎ら人間国宝・巨匠の作品も。火水休・10:00〜17:00</div>
+        <a class="link" href="https://www.sakazuki.or.jp/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">通年<br>火水休</div></td>
+      <td class="cs"><span class="badge perm">常設</span></td>
+    </tr>
+    <tr class="g-ichinokura">
+      <td class="cv"><div class="vname">幸兵衛窯</div><div class="vloc">多治見市市之倉町<div class="near" style="color:#3a9aaa">↑ 共通券あり</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h15分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">1804年開窯（常設見学）</div>
+        <div class="sub">七代・八代の作品展示館、ペルシャ古陶磁資料館を見学可。さかづき美術館との共通券あり（大人600円）。9:00〜17:00</div>
+        <div class="michelin">⭐⭐ ミシュラン・グリーンガイド 2つ星</div>
+        <a class="link" href="http://www.koubei-gama.co.jp/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">通年</div></td>
+      <td class="cs"><span class="badge perm">常設</span></td>
+    </tr>
+    <tr class="g-ichinokura">
+      <td class="cv"><div class="vname">丸モ高木陶器</div><div class="vloc">多治見市市之倉町<div class="near" style="color:#3a9aaa">↑ 徒歩圏内</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h05分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">1887年創業・美濃焼の老舗ショールーム</div>
+        <div class="sub">宮内庁御用達の実績あり。温度で絵柄が変わる「冷感シリーズ」が看板商品。美濃焼の器・酒器を展示販売</div>
+        <a class="link" href="https://www.marumo1887.com/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">通年</div></td>
+      <td class="cs"><span class="badge perm">常設</span></td>
+    </tr>
+    <tr class="g-ichinokura">
+      <td class="cv"><div class="vname">壱LABO</div><div class="vloc">多治見市市之倉町<div class="near" style="color:#3a9aaa">↑ 丸モ高木陶器運営</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h05分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">陶芸体験施設・茶室 — 2026年6月1日本格オープン！</div>
+        <div class="sub">「作った当日に完成品を持ち帰れる」ことが最大の特長。白壁の土蔵風2階建てに陶芸体験スペースと茶室。市之倉周遊型観光の核として市内飲食店とも連携予定</div>
+        <a class="link" href="https://www.marumo1887.com/" target="_blank">↗ 公式サイト（丸モ）</a>
+      </td>
+      <td class="cp"><div class="per">6/1〜<br>通年</div></td>
+      <td class="cs"><span class="badge soon">6/1〜</span></td>
+    </tr>
+    <tr>
+      <td class="cv"><div class="vname">岐阜県現代陶芸美術館</div><div class="vloc">多治見市・セラミックパークMINO</div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約2h15分</div><div class="droute">伊勢道 ＞ 東名阪 ＞ 名二環 ＞ 中央道（多治見IC）</div></div></td>
+      <td class="ct">
+        <div class="ttl">吉田璋也のデザイン — 新作民藝運動がめざした未来</div>
+        <div class="sub">牛ノ戸焼・スリップウェア・曲木椅子・竹バッグ・染織</div>
+        <div class="mingei">🪴 民藝：吉田璋也</div>
+        <a class="link" href="https://www.cpm-gifu.jp/museum" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">7/11<br>— 9/27</div></td>
+      <td class="cs"><span class="badge fut">夏〜秋</span></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ===== 遠征（兵庫・丹波篠山エリア） ===== -->
+<div class="section">
+  <div class="area-header">
+    <span class="area-name">遠征（兵庫・丹波篠山エリア）</span>
+    <span class="pref">兵庫県</span>
+  </div>
+  <table>
+    <tr class="g-tamba">
+      <td class="cv"><div class="vname">丹波伝統工芸公園<br>立杭 陶の郷</div><div class="vloc">丹波篠山市今田町上立杭</div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約3h20分</div><div class="droute">伊勢道 ＞ 新名神 ＞ 舞鶴若狭道（三田西IC）→10分</div></div></td>
+      <td class="ct">
+        <div class="ttl">六古窯・丹波焼の里（常設）</div>
+        <div class="sub">800年の歴史を持つ丹波立杭焼の総合施設。古丹波の名品〜現代作家50名の最新作。登り窯（蛇窯）見学・陶芸体験可。2026年4月より入園無料・TAMBA GATEWAY CENTER リニューアル</div>
+        <a class="link" href="https://tanbayaki.com/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">通年<br>火休</div></td>
+      <td class="cs"><span class="badge perm">常設</span></td>
+    </tr>
+    <tr class="g-tamba">
+      <td class="cv"><div class="vname">兵庫陶芸美術館</div><div class="vloc">丹波篠山市今田町<div class="near" style="color:#c0882a">↑ 陶の郷から徒歩5分</div></div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約3h20分</div><div class="droute">同上</div></div></td>
+      <td class="ct">
+        <div class="ttl">丹波焼の世界 season10</div>
+        <div class="sub">県指定重要文化財「田中寛コレクション」を中心に丹波焼800年を一望。赤土部・灰釉・白丹波など多彩な釉薬。展望デッキから丹波焼の里を一望</div>
+        <a class="link" href="https://www.mcart.jp/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">3/10<br>— 11/23</div></td>
+      <td class="cs"><span class="badge now">開催中</span></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ===== 遠征（静岡・高山エリア） ===== -->
+<div class="section">
+  <div class="area-header">
+    <span class="area-name">遠征（静岡・高山エリア）</span>
+    <span class="pref">静岡県・岐阜県</span>
+  </div>
+  <table>
+    <tr>
+      <td class="cv"><div class="vname">静岡市立芹沢銈介美術館</div><div class="vloc">静岡市・登呂遺跡隣</div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約3h30分</div><div class="droute">伊勢道 ＞ 伊勢湾岸道 ＞ 新東名（静岡IC）</div></div></td>
+      <td class="ct">
+        <div class="ttl">芹沢銈介の人物模様</div>
+        <div class="sub">代表作100点＋世界の仮面コレクション。附属「芹沢銈介の家」も見学可</div>
+        <div class="mingei">🪴 民藝：芹沢銈介</div>
+        <a class="link" href="https://www.seribi.jp/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">4/1<br>— 6/14</div></td>
+      <td class="cs"><span class="badge now">開催中</span></td>
+    </tr>
+    <tr>
+      <td class="cv"><div class="vname">日下部民藝館</div><div class="vloc">岐阜県・飛騨高山</div></td>
+      <td class="ctime"><div class="drivebox"><div class="dtime">🚗 約3h30分</div><div class="droute">伊勢道 ＞ 東名阪 ＞ 名神 ＞ 東海北陸道（高山IC）</div></div></td>
+      <td class="ct">
+        <div class="ttl">国重文・明治12年の町屋住宅（常設）</div>
+        <div class="sub">渋草焼・民藝品常設。隣接宿「谷屋」1日1組限定。高山の古い町並みと合わせて</div>
+        <a class="link" href="https://www.kusakabe-mingeikan.com/" target="_blank">↗ 公式サイト</a>
+      </td>
+      <td class="cp"><div class="per">通年<br>火休</div></td>
+      <td class="cs"><span class="badge perm">常設</span></td>
+    </tr>
+  </table>
+</div>
+
+<div class="note">
+  凡例：🟢 開催中　🔴 〆切（5月末まで）　🟡 もうすぐ開幕　⬜ 夏〜秋（参考）　🔵 常設<br>
+  ─────────────────────────────────────<br>
+  ■ 🟠 嵐山：嵯峨嵐山文華館・福田美術館は徒歩5分・共通割引あり。<br>
+  ■ 🟣 岡崎：京セラ美術館（5/24〆切）・泉屋博古館・京都国立近代美術館は同エリア徒歩10分圏。<br>
+  ■ 🔵 中之島：ガウディ展（〜6/15）・フェルメール展（8/21〜）・東洋陶磁美術館は同エリア。時期に注意。<br>
+  ■ 🟢 大阪南：ハルカス美術館・山王美術館は同日検討可。秋以降はワイエス巡回もハルカスへ。<br>
+  ■ 🩵 市之倉：さかづき美術館・幸兵衛窯・丸モ高木陶器・壱LABO（6/1〜）は全て徒歩〜車5分圏。<br>
+  ■ 🟤 丹波篠山：陶の郷・兵庫陶芸美術館は徒歩5分・同日2館OK。<br>
+  ■ 大阪日本民芸館（万博公園）は名神ルート。他の大阪館（名阪ルート）とは別日推奨。<br>
+  ■ ★ フェルメール展チケットは6月発売予定。大阪限定・巡回なし・おそらく最後の来日。<br>
+  ■ 所要時間はGemini算出・高速利用・目安。渋滞・時間帯により前後あり。
+</div>
+
+</body>
+</html>
