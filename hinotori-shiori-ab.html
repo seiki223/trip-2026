@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>火の鳥で行く 名古屋・栄 ｜ Ver.4</title>
+<title>火の鳥で行く 名古屋・栄</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Kiwi+Maru:wght@400;500&family=Yusei+Magic&display=swap" rel="stylesheet">
@@ -212,130 +212,70 @@
     z-index:4;
     overflow:hidden;
   }
-  /* outer element handles the wandering path */
+  /* outer element: starts low, wanders up and across, never the same line twice */
   .bird{
     position:absolute;
-    left:50%;
-    top:50%;
-    width:128px;
+    left:4%;
+    top:84%;
+    width:52px;
     height:auto;
-    margin-left:-64px;
-    animation: wander 34s cubic-bezier(.45,.05,.55,.95) infinite;
+    animation: fly-across 22s ease-in-out infinite;
     will-change: transform;
   }
-  /* middle layer: turns the bird around so it never flies tail-first */
-  .bird-facing{
-    animation: face 34s cubic-bezier(.45,.05,.55,.95) infinite;
-    transform-style: preserve-3d;
-  }
-  /* inner element handles banking/tilt + glow so the two don't fight */
   .bird-body{
-    animation: bank 34s cubic-bezier(.45,.05,.55,.95) infinite;
-    filter: drop-shadow(0 0 14px rgba(255,140,30,0.8)) drop-shadow(0 0 30px rgba(200,16,46,0.55));
+    animation: bob 1.4s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(232,198,106,0.8)) drop-shadow(0 0 18px rgba(201,154,46,0.55));
   }
-  .bird svg{ display:block; width:100%; height:auto; }
+  .bird svg{ display:block; width:100%; height:auto; overflow:visible; }
   .bird .wing{
     transform-origin: 34px 22px;
-    animation: flap 2.4s ease-in-out infinite;
+    animation: flap 1.4s ease-in-out infinite;
+  }
+  .bird .wing-back{
+    transform-origin: 30px 24px;
+    animation: flap-back 1.4s ease-in-out infinite;
   }
 
-  /* a wide, unhurried arc around the whole hero */
-  @keyframes wander{
-    0%   { transform: translate(-52vw,  10vh) scale(.6); }
-    12%  { transform: translate(-34vw,  -6vh) scale(.72); }
-    25%  { transform: translate( -8vw, -22vh) scale(.9); }
-    38%  { transform: translate( 22vw, -24vh) scale(1.05); }
-    50%  { transform: translate( 48vw,  -6vh) scale(1.12); }
-    62%  { transform: translate( 40vw,  16vh) scale(1); }
-    75%  { transform: translate( 10vw,  26vh) scale(.86); }
-    88%  { transform: translate(-26vw,  22vh) scale(.72); }
-    100% { transform: translate(-52vw,  10vh) scale(.6); }
+  /* mostly rightward drift, only a gentle overall rise — with a couple of
+     small backward dips so it still reads as unplanned wandering */
+  @keyframes fly-across{
+    0%   { transform: translate(0,     0)     scale(.55); opacity:0; }
+    7%   { opacity:1; }
+    16%  { transform: translate(14vw,  -3vh)  scale(.62); }
+    27%  { transform: translate(24vw,  -7vh)  scale(.6); }
+    38%  { transform: translate(37vw,  -6vh)  scale(.72); }
+    50%  { transform: translate(52vw, -12vh)  scale(.82); }
+    61%  { transform: translate(48vw, -18vh)  scale(.76); }
+    72%  { transform: translate(62vw, -16vh)  scale(.68); }
+    84%  { transform: translate(78vw, -22vh)  scale(.6); }
+    93%  { opacity:1; }
+    100% { transform: translate(94vw, -26vh)  scale(.5); opacity:0; }
   }
-  /* gentle banking that follows the curve — no spinning */
-  @keyframes bank{
-    0%   { transform: rotate(-14deg); }
-    12%  { transform: rotate(-16deg); }
-    25%  { transform: rotate( -8deg); }
-    38%  { transform: rotate(  2deg); }
-    50%  { transform: rotate( 10deg); }
-    62%  { transform: rotate(-16deg); }
-    75%  { transform: rotate(-12deg); }
-    88%  { transform: rotate(  0deg); }
-    100% { transform: rotate(-14deg); }
-  }
-  /* the turn: banks around at the far right, and again at the far left */
-  @keyframes face{
-    0%,  44% { transform: rotateY(0deg); }
-    54%, 94% { transform: rotateY(180deg); }
-    100%     { transform: rotateY(360deg); }
-  }
+  /* real wingbeat: a big, slow sweep, snapping up a touch quicker than it drifts down */
   @keyframes flap{
-    0%,100% { transform: rotate(-4deg) scaleY(1); }
-    50%     { transform: rotate(-20deg) scaleY(.82); }
+    0%   { transform: rotate(58deg); }
+    35%  { transform: rotate(-42deg); }
+    55%  { transform: rotate(-42deg); }
+    100% { transform: rotate(58deg); }
+  }
+  @keyframes flap-back{
+    0%   { transform: rotate(-58deg) scaleX(-1); }
+    35%  { transform: rotate(42deg) scaleX(-1); }
+    55%  { transform: rotate(42deg) scaleX(-1); }
+    100% { transform: rotate(-58deg) scaleX(-1); }
+  }
+  /* the whole body dips slightly on the downstroke, like real flight */
+  @keyframes bob{
+    0%,100% { transform: translateY(-2px) rotate(-2deg); }
+    45%     { transform: translateY(3px) rotate(2deg); }
   }
   @media (prefers-reduced-motion: reduce){
-    .bird, .bird-facing, .bird-body, .bird .wing{ animation:none; }
-    .bird{ transform: translate(0, -18vh) scale(.9); }
+    .bird, .bird-body, .bird .wing, .bird .wing-back{ animation:none; }
+    .bird{ transform: translate(46vw, -14vh) scale(.75); opacity:.9; }
   }
   @media (max-width:640px){
-    .bird{ width:92px; margin-left:-46px; }
+    .bird{ width:38px; }
   }
-  .version-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:.7rem;
-    padding:.45rem 1.1rem;
-    margin-bottom:1.4rem;
-    border:1px solid rgba(200,16,46,.55);
-    border-radius:999px;
-    background:rgba(200,16,46,.1);
-    font-size:.72rem;
-    letter-spacing:.1em;
-    color:var(--white);
-    position:relative;
-    z-index:5;
-  }
-  .version-badge .ver{ font-weight:700; color:var(--red); letter-spacing:.14em; }
-  .version-badge .dot{
-    width:6px; height:6px; border-radius:50%;
-    background:var(--red);
-    animation: ping 2.2s ease-out infinite;
-  }
-  @keyframes ping{
-    0%   { box-shadow:0 0 0 0 rgba(200,16,46,.6); }
-    70%  { box-shadow:0 0 0 9px rgba(200,16,46,0); }
-    100% { box-shadow:0 0 0 0 rgba(200,16,46,0); }
-  }
-  .changelog{
-    margin-top:2.4rem;
-    max-width:620px;
-    text-align:left;
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:1.2rem 1.4rem;
-    background:rgba(242,237,232,.05);
-    position:relative;
-    z-index:5;
-    backdrop-filter:blur(4px);
-  }
-  .changelog h3{
-    margin:0 0 .8rem;
-    font-size:.78rem;
-    letter-spacing:.22em;
-    color:var(--red);
-    font-weight:700;
-  }
-  .changelog ul{ margin:0; padding:0; list-style:none; display:grid; gap:.5rem; }
-  .changelog li{
-    font-size:.82rem; line-height:1.7; color:var(--grey);
-    padding-left:1rem; position:relative;
-  }
-  .changelog li::before{ content:"—"; position:absolute; left:0; color:var(--red); }
-  .changelog li b{ color:var(--white); font-weight:600; }
-  @media (prefers-reduced-motion: reduce){
-    .version-badge .dot{ animation:none; }
-  }
-
   .eyebrow{
     position:relative;
     z-index:6;
@@ -355,7 +295,11 @@
     letter-spacing:.04em;
     margin:0;
     font-weight:800;
-    position:relative;
+    color:var(--white);
+  }
+  .hero h1 span{ color:var(--red); }
+  .hero h1 .flame-text{
+    display:inline-block;
     background: linear-gradient(0deg,
       #3a0a02 0%,
       #7a0c1f 12%,
@@ -373,7 +317,6 @@
     filter: drop-shadow(0 0 18px rgba(255,120,20,0.55)) drop-shadow(0 0 34px rgba(200,16,46,0.4));
     animation: flame-flicker 2.6s ease-in-out infinite;
   }
-  .hero h1 span{ color:inherit; -webkit-text-stroke:0; }
   @keyframes flame-flicker{
     0%   { background-position: 0% 0%; }
     25%  { background-position: 0% 18%; }
@@ -382,7 +325,7 @@
     100% { background-position: 0% 0%; }
   }
   @media (prefers-reduced-motion: reduce){
-    .hero h1{ animation:none; }
+    .hero h1 .flame-text{ animation:none; }
   }
   .hero .sub{
     position:relative;
@@ -765,54 +708,57 @@
   </div>
   <div class="bird-track" aria-hidden="true">
     <div class="bird">
-      <div class="bird-facing">
       <div class="bird-body">
-      <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
         <defs>
           <linearGradient id="birdgrad" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stop-color="#c8102e"/>
-            <stop offset="45%" stop-color="#ff6a1a"/>
-            <stop offset="80%" stop-color="#ffce54"/>
-            <stop offset="100%" stop-color="#fff4d6"/>
+            <stop offset="0%" stop-color="#a9741f"/>
+            <stop offset="35%" stop-color="#c99a2e"/>
+            <stop offset="70%" stop-color="#e8c66a"/>
+            <stop offset="100%" stop-color="#fdf0c0"/>
           </linearGradient>
         </defs>
-        <!-- tail streamers -->
-        <path d="M20 24 Q4 20 0 12 Q10 22 16 26 Z" fill="url(#birdgrad)" opacity=".8"/>
-        <path d="M20 26 Q6 30 1 38 Q12 30 17 28 Z" fill="url(#birdgrad)" opacity=".6"/>
-        <!-- body -->
-        <path d="M18 25 Q38 14 62 18 Q78 21 96 14 Q84 26 66 28 Q44 32 18 25 Z" fill="url(#birdgrad)"/>
-        <!-- wing -->
+
+        <!-- far wing, swept up and back -->
+        <g class="wing-back">
+          <path d="M46 24 Q36 10 16 4 Q26 14 32 22 Q38 25 46 24 Z"
+                fill="url(#birdgrad)" opacity=".55"/>
+        </g>
+
+        <!-- trailing tail feathers, long and tapering -->
+        <path d="M26 25 Q12 22 0 14 Q10 24 20 28 Z" fill="url(#birdgrad)" opacity=".9"/>
+        <path d="M26 27 Q13 30 3 38 Q14 33 22 30 Z" fill="url(#birdgrad)" opacity=".65"/>
+
+        <!-- streamlined body, head and beak leading to the right -->
+        <path d="M24 26
+                 Q42 18 60 19
+                 Q76 20 92 12
+                 Q98 10 99 12
+                 Q94 20 80 25
+                 Q62 31 42 31
+                 Q30 30 24 26 Z"
+              fill="url(#birdgrad)"/>
+
+        <!-- near wing, the tall sweeping arc of the logo -->
         <g class="wing">
-          <path d="M34 22 Q44 2 66 0 Q56 14 50 24 Z" fill="url(#birdgrad)"/>
+          <path d="M38 24
+                   Q46 6 68 0
+                   Q78 -2 82 1
+                   Q70 6 60 15
+                   Q52 22 47 27 Z"
+                fill="url(#birdgrad)"/>
         </g>
       </svg>
       </div>
-      </div>
     </div>
   </div>
-  <div class="version-badge">
-    <span class="dot"></span>
-    <span class="ver">Ver. 4</span>
-    <span>2026.07.31 更新</span>
-  </div>
   <span class="eyebrow">近鉄特急 ひのとり 日帰り紀行</span>
-  <h1 class="mincho">火の鳥で行く<br>名古屋・<span>栄</span></h1>
+  <h1 class="mincho"><span class="flame-text">火の鳥</span>で行く<br>名古屋・栄</h1>
   <p class="sub">メタリックレッドの車体を纏い、翼を広げて駆ける「ひのとり」。<br>
   松阪から津へ、津から名古屋へ。一日を巡る旅のしおり。</p>
   <div class="ticket">
     <span>松阪</span><span class="arrow">✈</span><span>津</span><span class="arrow">✈</span><span><b>近鉄名古屋</b></span>
     <span style="opacity:.4">｜</span><span>松阪から津で乗り換え・ひのとりは全席指定</span>
-  </div>
-
-  <div class="changelog">
-    <h3>今回の更新</h3>
-    <ul>
-      <li>集合は<b>松阪駅</b>に。津で<b>ひのとり</b>に乗り換える形へ</li>
-      <li>焼肉をやめて<b>普通の食事</b>に。昼で行ける候補を一覧に</li>
-      <li>プランA/Bの分岐を廃止し、<b>一本の行程</b>にまとめ</li>
-      <li>コンパルのお土産は<b>暑い時期なので見送り</b></li>
-      <li>ランチ候補を<b>10軒</b>に拡充（土日営業・雰囲気重視）</li>
-    </ul>
   </div>
 </section>
 
