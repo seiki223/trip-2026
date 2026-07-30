@@ -566,32 +566,26 @@
   <p class="sub">メタリックレッドの車体を纏い、翼を広げて駆ける「ひのとり」。<br>
   津から名古屋へ、一日を巡る二つの行程プラン。</p>
   <div class="ticket">
-    <span>津</span><span class="arrow">✈</span><span><b>近鉄名古屋</b></span>
-    <span style="opacity:.4">｜</span><span>行きは特急ひのとり・全席指定</span>
+    <span>松阪</span><span class="arrow">✈</span><span>津</span><span class="arrow">✈</span><span><b>近鉄名古屋</b></span>
+    <span style="opacity:.4">｜</span><span>松阪から津で乗り換え・ひのとりは全席指定</span>
   </div>
 </section>
 
-<div class="switch-wrap">
-  <div class="switch">
-    <button id="btnA" class="active" onclick="showPlan('A')">PLAN A ｜ 樹一</button>
-    <button id="btnB" onclick="showPlan('B')">PLAN B ｜ 叙々苑</button>
-  </div>
-</div>
-
-<!-- PLAN A -->
-<section id="planA" class="plan active">
+<section class="plan active">
   <div class="plan-head">
-    <span class="kicker mincho">PLAN A</span>
-    <h2 class="mincho">夜は完全個室で、特別な焼肉を</h2>
-    <p>樹一の完全個室でゆったり過ごす、記念日仕立ての一日。混雑を気にせず、静かな時間を優先したい日に。</p>
+    <span class="kicker mincho">ROUTE</span>
+    <h2 class="mincho">一日の行程</h2>
+    <p>松阪で待ち合わせて、津でひのとりに乗り換え。午前は美術館、昼はゆっくり食事、午後は甘味処で一息。</p>
   </div>
   <div class="rail">
+
     <div class="stop">
-      <span class="time">朝・移動</span>
-      <h3 class="mincho">勢和多気IC → 津駅 → <a href="https://www.kintetsu.co.jp/senden/hinotori/" target="_blank" rel="noopener">ひのとり</a></h3>
-      <p>車で伊勢自動車道を津ICまで。津駅周辺に駐車場あり、駅から徒歩圏内。ひのとりで津から近鉄名古屋へ（全席指定・要予約）。</p>
-      <span class="tag">CAR + HINOTORI</span>
+      <span class="time">朝・集合</span>
+      <h3 class="mincho">松阪駅 → 津駅で<a href="https://www.kintetsu.co.jp/senden/hinotori/" target="_blank" rel="noopener">ひのとり</a>に乗り換え</h3>
+      <p>松阪駅で待ち合わせ。近鉄で津駅まで出て、そこからひのとりに乗り換えて近鉄名古屋へ。ひのとりは全席指定なので事前予約を。</p>
+      <span class="tag">MATSUSAKA → TSU → NAGOYA</span>
     </div>
+
     <div class="stop museum">
       <span class="time">午前（開館直後）</span>
       <h3 class="mincho"><a href="https://art-museum.city.nagoya.jp/" target="_blank" rel="noopener">名古屋市美術館</a></h3>
@@ -607,92 +601,85 @@
         <circle cx="365" cy="20" r="2.5" fill="#5c7a4f"/>
       </svg>
     </div>
-    <div class="stop">
-      <span class="time">13:00頃</span>
-      <h3 class="mincho"><a href="https://suzumeodori.co.jp/" target="_blank" rel="noopener">雀おどり總本店</a>で甘味</h3>
-      <p>1856年創業の老舗和菓子店。喫茶は18:30ラストオーダーなので、この時間ならゆったり過ごせる。</p>
-      <span class="tag">SWEETS</span>
-    </div>
-    <div class="stop">
-      <span class="time">15:00〜16:00頃</span>
-      <h3 class="mincho"><a href="https://www.hotpepper.jp/strJ000023017/" target="_blank" rel="noopener">コンパル栄東店</a>でお土産</h3>
-      <p>栄 森の地下街 南二番街、地下鉄の改札近く。19:00まで営業（LO18:30）。海老フライサンドはテイクアウト可、受け取りに10分ほど。</p>
-      <span class="tag">SOUVENIR</span>
-    </div>
-    <div class="stop">
-      <span class="time">17:00〜</span>
-      <h3 class="mincho"><a href="https://jyuichi-gokujo-matsusakaushi.owst.jp/" target="_blank" rel="noopener">極上松阪牛 樹一</a>で焼肉</h3>
-      <p>完全個室4部屋、松阪牛専門。栄駅徒歩4分。記念日向けのアニバーサリープランあり。カジュアルすぎる服装は不可。</p>
-      <span class="tag">DINNER</span>
-    </div>
-    <div class="stop">
-      <span class="time">夜・帰路</span>
-      <h3 class="mincho">近鉄名古屋 → 津 → 車で帰宅</h3>
-      <p>帰りはひのとりにこだわらなくてOK。時間が合えば急行や他の特急でも津まで戻れる。津駅で車に乗り換え、勢和多気IC経由で帰宅。</p>
-      <span class="tag">RETURN + CAR</span>
-    </div>
-  </div>
-</section>
 
-<!-- PLAN B -->
-<section id="planB" class="plan">
-  <div class="plan-head">
-    <span class="kicker mincho">PLAN B</span>
-    <h2 class="mincho">昼から焼肉、午後はゆったり</h2>
-    <p>叙々苑のランチタイムに合わせて焼肉を先に済ませ、午後は甘味とお土産に充てる、昼から自然に流れる一日。</p>
-  </div>
-  <div class="rail">
     <div class="stop">
-      <span class="time">朝・移動</span>
-      <h3 class="mincho">勢和多気IC → 津駅 → <a href="https://www.kintetsu.co.jp/senden/hinotori/" target="_blank" rel="noopener">ひのとり</a></h3>
-      <p>車で伊勢自動車道を津ICまで。津駅周辺に駐車場あり、駅から徒歩圏内。ひのとりで津から近鉄名古屋へ（全席指定・要予約）。</p>
-      <span class="tag">CAR + HINOTORI</span>
-    </div>
-    <div class="stop museum">
-      <span class="time">午前（開館直後）</span>
-      <h3 class="mincho"><a href="https://art-museum.city.nagoya.jp/" target="_blank" rel="noopener">名古屋市美術館</a></h3>
-      <p>「スウェーデン・テキスタイル」展。9:30〜17:00（金曜20:00まで）。開館直後の入場で混雑を避けられる。植物や動物モチーフの北欧デザイン、約250点。</p>
-      <span class="tag swe">MUSEUM ｜ SVERIGE</span>
-      <svg class="meadow-motif" viewBox="0 0 400 40" preserveAspectRatio="none">
-        <path d="M0 32 Q20 20 40 32 T80 32 T120 32 T160 32 T200 32 T240 32 T280 32 T320 32 T360 32 T400 32" fill="none" stroke="#93b579" stroke-width="2"/>
-        <circle cx="30" cy="24" r="3" fill="#93b579"/>
-        <circle cx="95" cy="20" r="2.5" fill="#5c7a4f"/>
-        <circle cx="160" cy="24" r="3" fill="#93b579"/>
-        <circle cx="230" cy="19" r="2.5" fill="#5c7a4f"/>
-        <circle cx="300" cy="24" r="3" fill="#93b579"/>
-        <circle cx="365" cy="20" r="2.5" fill="#5c7a4f"/>
-      </svg>
-    </div>
-    <div class="stop">
-      <span class="time">13:00〜14:00</span>
-      <h3 class="mincho"><a href="https://www.jojoen.co.jp/shop/jojoen/nagoya_sakae/" target="_blank" rel="noopener">叙々苑 名古屋栄店</a>で焼肉ランチ</h3>
-      <p>ランチタイムは11:00〜15:00（LO）なので13時スタートでも余裕。栄駅サカエチカS8出口すぐのマルエイガレリア3F。和風特別個室・テーブル個室あり、全席禁煙。</p>
+      <span class="time">昼</span>
+      <h3 class="mincho">ランチ</h3>
+      <p>下の候補から、その日の気分で。いずれも要予約なので、行き先が決まったら早めに押さえておくのが安心。</p>
       <span class="tag">LUNCH</span>
     </div>
+
     <div class="stop">
-      <span class="time">15:00〜16:00頃</span>
-      <h3 class="mincho"><a href="https://suzumeodori.co.jp/" target="_blank" rel="noopener">雀おどり總本店</a>で甘味</h3>
-      <p>焼肉のあとの一服。喫茶は18:30ラストオーダーなので、この時間なら余裕を持って楽しめる。</p>
+      <span class="time">午後</span>
+      <h3 class="mincho">甘味処で一息</h3>
+      <p>こちらも下に候補をまとめてあります。暑い時期なので、かき氷のある店が心地よさそう。</p>
       <span class="tag">SWEETS</span>
     </div>
+
     <div class="stop">
-      <span class="time">17:00頃</span>
-      <h3 class="mincho"><a href="https://www.hotpepper.jp/strJ000023017/" target="_blank" rel="noopener">コンパル栄東店</a>でお土産</h3>
-      <p>栄 森の地下街 南二番街、地下鉄の改札近く。19:00まで営業（LO18:30）なので、この時間なら間に合う。</p>
-      <span class="tag">SOUVENIR</span>
+      <span class="time">夕方・帰路</span>
+      <h3 class="mincho">近鉄名古屋 → 津 → 松阪</h3>
+      <p>帰りはひのとりにこだわらなくてOK。時間が合えば急行や他の特急でも。津で乗り換えて松阪へ。</p>
+      <span class="tag">RETURN</span>
     </div>
-    <div class="stop">
-      <span class="time">夕方〜夜・帰路</span>
-      <h3 class="mincho">近鉄名古屋 → 津 → 車で帰宅</h3>
-      <p>ディナーがない分、早めの時間に動ける。帰りはひのとりにこだわらず、急行や他の特急でも津まで戻れる。津駅で車に乗り換え、勢和多気IC経由で帰宅。</p>
-      <span class="tag">RETURN + CAR</span>
+
+  </div>
+</section>
+
+<section class="sweets">
+  <h2 class="mincho">ランチの候補</h2>
+  <p class="lead">どれも昼に営業している店です。落ち着いて食べられるところを中心に。</p>
+
+  <div class="sweets-grid">
+
+    <div class="sweet-card">
+      <span class="area">丸の内｜庭園と日本建築</span>
+      <h3 class="mincho"><a href="https://www.thekawabunnagoya.com/thekawabunnagoya/restaurant/" target="_blank" rel="noopener">THE KAWABUN NAGOYA</a></h3>
+      <span class="score">400年の料亭・河文が手がける</span>
+      <p>登録有形文化財の日本建築と大正モダニズムが融合した空間。四季の庭園を望むイタリアン。ランチは平日11:00〜13:30のみ、火曜定休。</p>
+      <div class="links">
+        <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/restaurant/" target="_blank" rel="noopener">公式サイト</a>
+        <a href="https://tabelog.com/aichi/A2301/A230102/23007484/" target="_blank" rel="noopener">食べログ</a>
+      </div>
     </div>
+
+    <div class="sweet-card">
+      <span class="area">栄｜ホテル内</span>
+      <h3 class="mincho"><a href="https://www.nadaman.co.jp/pages/restaurant_nagoya" target="_blank" rel="noopener">名古屋 なだ万</a></h3>
+      <span class="score">老舗料亭の日本料理</span>
+      <p>名古屋東急ホテル2F、栄駅12番出口から徒歩5分。村野藤吾事務所の設計で重厚感のある落ち着いた店内。噴水を眺めるテーブル席も。ランチ11:30〜14:30（LO14:00）、無休。</p>
+      <div class="links">
+        <a href="https://www.nadaman.co.jp/pages/restaurant_nagoya" target="_blank" rel="noopener">公式サイト</a>
+        <a href="https://restaurant.ikyu.com/102476" target="_blank" rel="noopener">一休</a>
+      </div>
+    </div>
+
+    <div class="sweet-card">
+      <span class="area">栄｜三重ゆかり</span>
+      <h3 class="mincho"><a href="https://www.butasute.co.jp/" target="_blank" rel="noopener">豚捨 中日ビル店</a></h3>
+      <span class="score">伊勢の老舗精肉店が営む</span>
+      <p>松阪牛のルーツとされる黒毛和牛「伊勢肉」を創業以来守る老舗。伊勢肉を使ったひつまぶし御膳のランチ。栄駅からすぐ。</p>
+      <div class="links">
+        <a href="https://www.butasute.co.jp/" target="_blank" rel="noopener">公式サイト</a>
+      </div>
+    </div>
+
+    <div class="sweet-card">
+      <span class="area">栄｜おばんざい</span>
+      <h3 class="mincho"><a href="https://www.ozmall.co.jp/restaurant/aichi/nagoya-city/lunch/japanese/" target="_blank" rel="noopener">旬活和食 ままや</a></h3>
+      <span class="score">創作和食</span>
+      <p>栄駅から徒歩5分。カウンターに常時60種類以上の創作料理が並び、眺めながら選べる。天然木や左官壁、和紙を組み合わせた空間。</p>
+      <div class="links">
+        <a href="https://www.ozmall.co.jp/restaurant/aichi/nagoya-city/lunch/japanese/" target="_blank" rel="noopener">詳細</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <section class="sweets">
   <h2 class="mincho">甘味処の候補</h2>
-  <p class="lead">どちらのプランでも寄れるように、口コミ評価の高い店を集めました。その日の気分で選べます。</p>
+  <p class="lead">口コミ評価の高い店を集めました。暑い時期なので、かき氷のある店が心地よさそうです。</p>
 
   <div class="sweets-grid">
 
@@ -761,47 +748,8 @@
   </div>
 </section>
 
-<section class="compare">
-  <h2 class="mincho">A / B 比較</h2>
-  <table>
-    <tr>
-      <th>項目</th>
-      <th>PLAN A（樹一）</th>
-      <th>PLAN B（叙々苑）</th>
-    </tr>
-    <tr>
-      <td class="head">焼肉のタイミング</td>
-      <td>夜（17時〜）</td>
-      <td>昼（13時〜）</td>
-    </tr>
-    <tr>
-      <td class="head">個室の形式</td>
-      <td>完全個室（4部屋）・松阪牛専門</td>
-      <td>和風特別個室・テーブル個室あり</td>
-    </tr>
-    <tr>
-      <td class="head">帰宅時間</td>
-      <td>やや遅め（ディナー後）</td>
-      <td>早め（ランチ後に午後を使う）</td>
-    </tr>
-    <tr>
-      <td class="head">全体の雰囲気</td>
-      <td>夜にかけて特別感のある流れ</td>
-      <td>昼から自然に流れる、軽やかな一日</td>
-    </tr>
-  </table>
-</section>
+<footer>HINOTORI DAY TRIP ｜ 松阪 ⇄ 津 ⇄ 近鉄名古屋</footer>
 
-<footer>HINOTORI DAY TRIP ｜ 津 ⇄ 近鉄名古屋</footer>
-
-<script>
-  function showPlan(which){
-    document.getElementById('planA').classList.toggle('active', which==='A');
-    document.getElementById('planB').classList.toggle('active', which==='B');
-    document.getElementById('btnA').classList.toggle('active', which==='A');
-    document.getElementById('btnB').classList.toggle('active', which==='B');
-  }
-</script>
 
 </body>
 </html>
