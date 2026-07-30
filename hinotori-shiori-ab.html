@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>火の鳥で行く 名古屋・栄 ｜ A/B プラン</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0b0a0a;
+    --black-soft:#161312;
+    --panel:#1c1817;
+    --red:#c8102e;
+    --red-deep:#7a0c1f;
+    --red-glow: rgba(200,16,46,0.35);
+    --white:#f2ede8;
+    --grey:#9a908c;
+    --line: rgba(242,237,232,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--black);
+    color:var(--white);
+    font-family:"Zen Kaku Gothic New", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mincho{font-family:"Shippori Mincho", serif;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:92svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    padding:6rem 1.5rem 4rem;
+    text-align:center;
+    background:
+      radial-gradient(ellipse 130% 70% at 50% -10%, var(--red-glow), transparent 60%),
+      linear-gradient(180deg, #050404 0%, #0b0a0a 60%, #050404 100%);
+    border-bottom:1px solid var(--line);
+  }
+  .speed-lines{
+    position:absolute; inset:0;
+    pointer-events:none;
+    opacity:.7;
+  }
+  .kanji-flame{ display:none; }
+  .flame-bg{
+    position:absolute;
+    left:50%;
+    bottom:-4%;
+    transform:translateX(-50%);
+    width:min(92vw, 780px);
+    height:56%;
+    pointer-events:none;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    gap:-2rem;
+    filter: blur(1px);
+    mix-blend-mode: screen;
+  }
+  .flame{
+    position:relative;
+    width:14%;
+    margin:0 -3%;
+    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: radial-gradient(ellipse at 50% 100%,
+      #fff4c2 0%,
+      #ffb62e 22%,
+      #ff6a1a 45%,
+      #c8102e 70%,
+      rgba(122,12,31,0) 100%);
+    filter: blur(6px);
+    transform-origin:50% 100%;
+    animation: flicker 2.4s ease-in-out infinite;
+    opacity:.85;
+  }
+  .flame.f1{height:62%; animation-duration:2.1s; animation-delay:-.3s;}
+  .flame.f2{height:88%; animation-duration:2.6s; animation-delay:-1.1s;}
+  .flame.f3{height:70%; animation-duration:1.9s; animation-delay:-.6s;}
+  .flame.f4{height:95%; animation-duration:2.8s; animation-delay:-1.6s;}
+  .flame.f5{height:66%; animation-duration:2.2s; animation-delay:-.9s;}
+  .flame.f6{height:80%; animation-duration:2.5s; animation-delay:-.2s;}
+  .flame.f7{height:58%; animation-duration:2.0s; animation-delay:-1.4s;}
+  @keyframes flicker{
+    0%   { transform: scaleY(1) scaleX(1) skewX(0deg) translateY(0); }
+    20%  { transform: scaleY(1.08) scaleX(.94) skewX(-2deg) translateY(-2%); }
+    40%  { transform: scaleY(.92) scaleX(1.05) skewX(2deg) translateY(1%); }
+    60%  { transform: scaleY(1.05) scaleX(.96) skewX(-1deg) translateY(-1%); }
+    80%  { transform: scaleY(.96) scaleX(1.02) skewX(1.5deg) translateY(0); }
+    100% { transform: scaleY(1) scaleX(1) skewX(0deg) translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .flame{ animation:none; }
+  }
+
+  /* ---------- FIREBIRD FLIGHT ---------- */
+  .bird-track{
+    position:absolute;
+    left:0; right:0;
+    bottom:22%;
+    height:34%;
+    pointer-events:none;
+    z-index:2;
+  }
+  .bird{
+    position:absolute;
+    left:0;
+    top:60%;
+    width:64px;
+    height:auto;
+    animation: fly-across 11s linear infinite;
+    filter: drop-shadow(0 0 12px rgba(255,140,30,0.75)) drop-shadow(0 0 26px rgba(200,16,46,0.5));
+  }
+  .bird svg{ display:block; width:100%; height:auto; }
+  .bird .wing{
+    transform-origin: 34px 22px;
+    animation: flap 0.9s ease-in-out infinite;
+  }
+  @keyframes fly-across{
+    0%   { transform: translate(-16vw, 30%) rotate(-6deg) scale(.7); opacity:0; }
+    12%  { opacity:1; }
+    30%  { transform: translate(24vw, -26%) rotate(-10deg) scale(.9); }
+    52%  { transform: translate(52vw, 6%) rotate(4deg) scale(1.05); }
+    74%  { transform: translate(78vw, -30%) rotate(-8deg) scale(.9); }
+    90%  { opacity:1; }
+    100% { transform: translate(112vw, 4%) rotate(-4deg) scale(.7); opacity:0; }
+  }
+  @keyframes flap{
+    0%,100% { transform: rotate(0deg) scaleY(1); }
+    50%     { transform: rotate(-26deg) scaleY(.72); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .bird{ animation:none; opacity:.9; transform: translate(46vw, 0) scale(.95); }
+    .bird .wing{ animation:none; }
+  }
+  @media (max-width:640px){
+    .bird{ width:46px; }
+  }
+  .eyebrow{
+    letter-spacing:.42em;
+    font-size:.7rem;
+    color:var(--red);
+    margin-bottom:1.6rem;
+    text-transform:uppercase;
+    font-weight:700;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 5rem);
+    line-height:1.15;
+    margin:0;
+    font-weight:800;
+    position:relative;
+    background: linear-gradient(0deg,
+      #3a0a02 0%,
+      #7a0c1f 12%,
+      #c8102e 28%,
+      #e0451c 42%,
+      #ff7a1a 56%,
+      #ffce54 68%,
+      #fff4d6 78%,
+      #ff7a1a 88%,
+      #c8102e 100%);
+    background-size: 100% 220%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    filter: drop-shadow(0 0 18px rgba(255,120,20,0.55)) drop-shadow(0 0 34px rgba(200,16,46,0.4));
+    animation: flame-flicker 2.6s ease-in-out infinite;
+  }
+  .hero h1 span{ color:inherit; -webkit-text-stroke:0; }
+  @keyframes flame-flicker{
+    0%   { background-position: 0% 0%; }
+    25%  { background-position: 0% 18%; }
+    50%  { background-position: 0% 6%; }
+    75%  { background-position: 0% 24%; }
+    100% { background-position: 0% 0%; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero h1{ animation:none; }
+  }
+  .hero .sub{
+    margin-top:1.6rem;
+    font-size:clamp(.95rem, 2vw, 1.1rem);
+    color:var(--grey);
+    letter-spacing:.05em;
+    line-height:1.9;
+    max-width:640px;
+  }
+  .ticket{
+    margin-top:3rem;
+    display:inline-flex;
+    align-items:center;
+    gap:1.2rem;
+    padding:1rem 2rem;
+    border:1px solid var(--red-deep);
+    border-radius:4px;
+    background:rgba(200,16,46,0.06);
+    font-size:.82rem;
+    letter-spacing:.08em;
+    color:var(--white);
+  }
+  .ticket b{color:var(--red); font-weight:700;}
+  .ticket .arrow{color:var(--red);}
+
+  /* ---------- TOGGLE ---------- */
+  .switch-wrap{
+    position:sticky;
+    top:0;
+    z-index:50;
+    display:flex;
+    justify-content:center;
+    padding:1rem 1rem;
+    background:rgba(11,10,10,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .switch{
+    display:inline-flex;
+    border:1px solid var(--red-deep);
+    border-radius:999px;
+    overflow:hidden;
+  }
+  .switch button{
+    appearance:none;
+    border:none;
+    background:transparent;
+    color:var(--grey);
+    font-family:"Zen Kaku Gothic New", sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    letter-spacing:.12em;
+    padding:.75rem 1.8rem;
+    cursor:pointer;
+    transition:.25s;
+  }
+  .switch button.active{
+    background:var(--red);
+    color:var(--white);
+  }
+  .switch button:focus-visible{outline:2px solid var(--white); outline-offset:-2px;}
+
+  /* ---------- PLAN HEADER ---------- */
+  .plan{
+    display:none;
+    max-width:920px;
+    margin:0 auto;
+    padding:4rem 1.5rem 6rem;
+  }
+  .plan.active{display:block;}
+  .plan-head{
+    text-align:center;
+    margin-bottom:3.5rem;
+  }
+  .plan-head .kicker{
+    display:block;
+    font-size:.72rem;
+    letter-spacing:.4em;
+    color:var(--red);
+    margin-bottom:1rem;
+    font-weight:700;
+  }
+  .plan-head h2{
+    font-size:clamp(1.6rem,4vw,2.2rem);
+    margin:0 0 1rem;
+    font-weight:600;
+  }
+  .plan-head p{
+    color:var(--grey);
+    font-size:.92rem;
+    line-height:1.9;
+    max-width:560px;
+    margin:0 auto;
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .rail{
+    position:relative;
+    padding-left:2.4rem;
+    border-left:2px solid var(--red-deep);
+  }
+  .stop{
+    position:relative;
+    padding-bottom:2.6rem;
+  }
+  .stop:last-child{padding-bottom:0;}
+  .stop::before{
+    content:"";
+    position:absolute;
+    left:-2.55rem;
+    top:.35rem;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:var(--black);
+    border:3px solid var(--red);
+  }
+  .stop .time{
+    display:block;
+    font-size:.7rem;
+    letter-spacing:.24em;
+    color:var(--red);
+    font-weight:700;
+    margin-bottom:.5rem;
+  }
+  .stop h3{
+    margin:0 0 .6rem;
+    font-size:1.15rem;
+    font-weight:600;
+  }
+  .stop h3 a{
+    color:inherit;
+    text-decoration:underline;
+    text-decoration-color: var(--red-deep);
+    text-underline-offset:3px;
+    transition:.2s;
+  }
+  .stop h3 a:hover, .stop h3 a:focus-visible{
+    color:var(--red);
+    text-decoration-color: var(--red);
+  }
+  .stop.museum h3 a{
+    text-decoration-color: var(--meadow-light);
+  }
+  .stop.museum h3 a:hover, .stop.museum h3 a:focus-visible{
+    color:var(--meadow-light);
+    text-decoration-color: var(--meadow-light);
+  }
+  .stop p{
+    margin:0;
+    font-size:.9rem;
+    line-height:1.85;
+    color:var(--grey);
+  }
+  .stop .tag{
+    display:inline-block;
+    margin-top:.8rem;
+    font-size:.68rem;
+    letter-spacing:.14em;
+    color:var(--black);
+    background:var(--white);
+    padding:.25rem .65rem;
+    border-radius:2px;
+    font-weight:700;
+  }
+
+  /* ---------- MUSEUM / SWEDISH MEADOW ACCENT ---------- */
+  :root{
+    --meadow:#5c7a4f;
+    --meadow-light:#93b579;
+    --meadow-deep:#2f4327;
+  }
+  .stop.museum{
+    background:
+      linear-gradient(180deg, rgba(92,122,79,0.1), transparent 70%);
+    border-radius:10px;
+    padding:1.4rem 1.5rem 1.6rem;
+    margin-left:-1.5rem;
+    padding-left:calc(1.5rem + 2.4rem);
+    position:relative;
+    overflow:hidden;
+  }
+  .stop.museum::before{
+    border-color: var(--meadow);
+    box-shadow:0 0 0 4px rgba(92,122,79,0.22);
+  }
+  .stop.museum .time{ color:var(--meadow-light); }
+  .stop.museum .meadow-motif{
+    position:absolute;
+    right:0; bottom:0; left:0;
+    height:46px;
+    opacity:.5;
+    pointer-events:none;
+  }
+  .stop.museum .tag.swe{
+    background:var(--meadow-light);
+    color:var(--meadow-deep);
+  }
+
+  /* ---------- SWEETS LIST ---------- */
+  .sweets{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 1.5rem 5rem;
+  }
+  .sweets h2{
+    text-align:center;
+    font-size:1.4rem;
+    margin-bottom:.8rem;
+    font-weight:600;
+  }
+  .sweets .lead{
+    text-align:center;
+    color:var(--grey);
+    font-size:.88rem;
+    line-height:1.9;
+    max-width:560px;
+    margin:0 auto 2.6rem;
+  }
+  .sweets-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    gap:1rem;
+  }
+  .sweet-card{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:1.3rem 1.4rem;
+    background:linear-gradient(160deg, rgba(242,237,232,0.045), transparent);
+    display:flex;
+    flex-direction:column;
+    gap:.55rem;
+  }
+  .sweet-card .area{
+    font-size:.66rem;
+    letter-spacing:.2em;
+    color:var(--red);
+    font-weight:700;
+  }
+  .sweet-card h3{
+    margin:0;
+    font-size:1.05rem;
+    font-weight:600;
+  }
+  .sweet-card h3 a{
+    color:inherit;
+    text-decoration:underline;
+    text-decoration-color:var(--red-deep);
+    text-underline-offset:3px;
+    transition:.2s;
+  }
+  .sweet-card h3 a:hover, .sweet-card h3 a:focus-visible{
+    color:var(--red);
+    text-decoration-color:var(--red);
+  }
+  .sweet-card .score{
+    font-size:.76rem;
+    color:var(--white);
+    letter-spacing:.04em;
+  }
+  .sweet-card .score b{ color:var(--red); font-weight:700; }
+  .sweet-card p{
+    margin:0;
+    font-size:.84rem;
+    line-height:1.8;
+    color:var(--grey);
+  }
+  .sweet-card .links{
+    margin-top:.35rem;
+    display:flex;
+    gap:.7rem;
+    flex-wrap:wrap;
+  }
+  .sweet-card .links a{
+    font-size:.72rem;
+    letter-spacing:.08em;
+    color:var(--grey);
+    text-decoration:none;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:.28rem .8rem;
+    transition:.2s;
+  }
+  .sweet-card .links a:hover, .sweet-card .links a:focus-visible{
+    color:var(--white);
+    border-color:var(--red);
+  }
+  .sweet-card.note{
+    border-style:dashed;
+    opacity:.85;
+  }
+  .sweet-card.note .area{ color:var(--grey); }
+
+  /* ---------- COMPARE STRIP ---------- */
+  .compare{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 1.5rem 6rem;
+  }
+  .compare h2{
+    text-align:center;
+    font-size:1.4rem;
+    margin-bottom:2rem;
+    font-weight:600;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:.86rem;
+  }
+  th, td{
+    padding:.9rem 1rem;
+    text-align:left;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  th{
+    color:var(--red);
+    font-weight:700;
+    letter-spacing:.05em;
+    font-size:.72rem;
+    text-transform:uppercase;
+  }
+  td{color:var(--grey);}
+  td.head{color:var(--white); font-weight:700;}
+
+  footer{
+    text-align:center;
+    padding:3rem 1.5rem 4rem;
+    color:rgba(242,237,232,0.3);
+    font-size:.72rem;
+    letter-spacing:.2em;
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <svg class="speed-lines" viewBox="0 0 1000 700" preserveAspectRatio="none">
+    <path d="M -50 640 C 250 560, 350 300, 550 300 S 850 140, 1060 60" fill="none" stroke="#c8102e" stroke-width="1.2" opacity="0.35"/>
+    <path d="M -50 560 C 220 500, 330 260, 520 260 S 800 110, 1060 20" fill="none" stroke="#c8102e" stroke-width=".8" opacity="0.2"/>
+  </svg>
+  <div class="kanji-flame" aria-hidden="true">炎</div>
+  <div class="flame-bg" aria-hidden="true">
+    <div class="flame f1"></div>
+    <div class="flame f2"></div>
+    <div class="flame f3"></div>
+    <div class="flame f4"></div>
+    <div class="flame f5"></div>
+    <div class="flame f6"></div>
+    <div class="flame f7"></div>
+  </div>
+  <div class="bird-track" aria-hidden="true">
+    <div class="bird">
+      <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="birdgrad" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stop-color="#c8102e"/>
+            <stop offset="45%" stop-color="#ff6a1a"/>
+            <stop offset="80%" stop-color="#ffce54"/>
+            <stop offset="100%" stop-color="#fff4d6"/>
+          </linearGradient>
+        </defs>
+        <!-- tail streamers -->
+        <path d="M20 24 Q4 20 0 12 Q10 22 16 26 Z" fill="url(#birdgrad)" opacity=".8"/>
+        <path d="M20 26 Q6 30 1 38 Q12 30 17 28 Z" fill="url(#birdgrad)" opacity=".6"/>
+        <!-- body -->
+        <path d="M18 25 Q38 14 62 18 Q78 21 96 14 Q84 26 66 28 Q44 32 18 25 Z" fill="url(#birdgrad)"/>
+        <!-- wing -->
+        <g class="wing">
+          <path d="M34 22 Q44 2 66 0 Q56 14 50 24 Z" fill="url(#birdgrad)"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <span class="eyebrow">近鉄特急 ひのとり 日帰り紀行</span>
+  <h1 class="mincho">火の鳥で行く<br>名古屋・<span>栄</span></h1>
+  <p class="sub">メタリックレッドの車体を纏い、翼を広げて駆ける「ひのとり」。<br>
+  津から名古屋へ、一日を巡る二つの行程プラン。</p>
+  <div class="ticket">
+    <span>津</span><span class="arrow">✈</span><span><b>近鉄名古屋</b></span>
+    <span style="opacity:.4">｜</span><span>行きは特急ひのとり・全席指定</span>
+  </div>
+</section>
+
+<div class="switch-wrap">
+  <div class="switch">
+    <button id="btnA" class="active" onclick="showPlan('A')">PLAN A ｜ 樹一</button>
+    <button id="btnB" onclick="showPlan('B')">PLAN B ｜ 叙々苑</button>
+  </div>
+</div>
+
+<!-- PLAN A -->
+<section id="planA" class="plan active">
+  <div class="plan-head">
+    <span class="kicker mincho">PLAN A</span>
+    <h2 class="mincho">夜は完全個室で、特別な焼肉を</h2>
+    <p>樹一の完全個室でゆったり過ごす、記念日仕立ての一日。混雑を気にせず、静かな時間を優先したい日に。</p>
+  </div>
+  <div class="rail">
+    <div class="stop">
+      <span class="time">朝・移動</span>
+      <h3 class="mincho">勢和多気IC → 津駅 → <a href="https://www.kintetsu.co.jp/senden/hinotori/" target="_blank" rel="noopener">ひのとり</a></h3>
+      <p>車で伊勢自動車道を津ICまで。津駅周辺に駐車場あり、駅から徒歩圏内。ひのとりで津から近鉄名古屋へ（全席指定・要予約）。</p>
+      <span class="tag">CAR + HINOTORI</span>
+    </div>
+    <div class="stop museum">
+      <span class="time">午前（開館直後）</span>
+      <h3 class="mincho"><a href="https://art-museum.city.nagoya.jp/" target="_blank" rel="noopener">名古屋市美術館</a></h3>
+      <p>「スウェーデン・テキスタイル」展。9:30〜17:00（金曜20:00まで）。開館直後の入場で混雑を避けられる。植物や動物モチーフの北欧デザイン、約250点。</p>
+      <span class="tag swe">MUSEUM ｜ SVERIGE</span>
+      <svg class="meadow-motif" viewBox="0 0 400 40" preserveAspectRatio="none">
+        <path d="M0 32 Q20 20 40 32 T80 32 T120 32 T160 32 T200 32 T240 32 T280 32 T320 32 T360 32 T400 32" fill="none" stroke="#93b579" stroke-width="2"/>
+        <circle cx="30" cy="24" r="3" fill="#93b579"/>
+        <circle cx="95" cy="20" r="2.5" fill="#5c7a4f"/>
+        <circle cx="160" cy="24" r="3" fill="#93b579"/>
+        <circle cx="230" cy="19" r="2.5" fill="#5c7a4f"/>
+        <circle cx="300" cy="24" r="3" fill="#93b579"/>
+        <circle cx="365" cy="20" r="2.5" fill="#5c7a4f"/>
+      </svg>
+    </div>
+    <div class="stop">
+      <span class="time">13:00頃</span>
+      <h3 class="mincho"><a href="https://suzumeodori.co.jp/" target="_blank" rel="noopener">雀おどり總本店</a>で甘味</h3>
+      <p>1856年創業の老舗和菓子店。喫茶は18:30ラストオーダーなので、この時間ならゆったり過ごせる。</p>
+      <span class="tag">SWEETS</span>
+    </div>
+    <div class="stop">
+      <span class="time">15:00〜16:00頃</span>
+      <h3 class="mincho"><a href="https://www.hotpepper.jp/strJ000023017/" target="_blank" rel="noopener">コンパル栄東店</a>でお土産</h3>
+      <p>栄 森の地下街 南二番街、地下鉄の改札近く。19:00まで営業（LO18:30）。海老フライサンドはテイクアウト可、受け取りに10分ほど。</p>
+      <span class="tag">SOUVENIR</span>
+    </div>
+    <div class="stop">
+      <span class="time">17:00〜</span>
+      <h3 class="mincho"><a href="https://jyuichi-gokujo-matsusakaushi.owst.jp/" target="_blank" rel="noopener">極上松阪牛 樹一</a>で焼肉</h3>
+      <p>完全個室4部屋、松阪牛専門。栄駅徒歩4分。記念日向けのアニバーサリープランあり。カジュアルすぎる服装は不可。</p>
+      <span class="tag">DINNER</span>
+    </div>
+    <div class="stop">
+      <span class="time">夜・帰路</span>
+      <h3 class="mincho">近鉄名古屋 → 津 → 車で帰宅</h3>
+      <p>帰りはひのとりにこだわらなくてOK。時間が合えば急行や他の特急でも津まで戻れる。津駅で車に乗り換え、勢和多気IC経由で帰宅。</p>
+      <span class="tag">RETURN + CAR</span>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN B -->
+<section id="planB" class="plan">
+  <div class="plan-head">
+    <span class="kicker mincho">PLAN B</span>
+    <h2 class="mincho">昼から焼肉、午後はゆったり</h2>
+    <p>叙々苑のランチタイムに合わせて焼肉を先に済ませ、午後は甘味とお土産に充てる、昼から自然に流れる一日。</p>
+  </div>
+  <div class="rail">
+    <div class="stop">
+      <span class="time">朝・移動</span>
+      <h3 class="mincho">勢和多気IC → 津駅 → <a href="https://www.kintetsu.co.jp/senden/hinotori/" target="_blank" rel="noopener">ひのとり</a></h3>
+      <p>車で伊勢自動車道を津ICまで。津駅周辺に駐車場あり、駅から徒歩圏内。ひのとりで津から近鉄名古屋へ（全席指定・要予約）。</p>
+      <span class="tag">CAR + HINOTORI</span>
+    </div>
+    <div class="stop museum">
+      <span class="time">午前（開館直後）</span>
+      <h3 class="mincho"><a href="https://art-museum.city.nagoya.jp/" target="_blank" rel="noopener">名古屋市美術館</a></h3>
+      <p>「スウェーデン・テキスタイル」展。9:30〜17:00（金曜20:00まで）。開館直後の入場で混雑を避けられる。植物や動物モチーフの北欧デザイン、約250点。</p>
+      <span class="tag swe">MUSEUM ｜ SVERIGE</span>
+      <svg class="meadow-motif" viewBox="0 0 400 40" preserveAspectRatio="none">
+        <path d="M0 32 Q20 20 40 32 T80 32 T120 32 T160 32 T200 32 T240 32 T280 32 T320 32 T360 32 T400 32" fill="none" stroke="#93b579" stroke-width="2"/>
+        <circle cx="30" cy="24" r="3" fill="#93b579"/>
+        <circle cx="95" cy="20" r="2.5" fill="#5c7a4f"/>
+        <circle cx="160" cy="24" r="3" fill="#93b579"/>
+        <circle cx="230" cy="19" r="2.5" fill="#5c7a4f"/>
+        <circle cx="300" cy="24" r="3" fill="#93b579"/>
+        <circle cx="365" cy="20" r="2.5" fill="#5c7a4f"/>
+      </svg>
+    </div>
+    <div class="stop">
+      <span class="time">13:00〜14:00</span>
+      <h3 class="mincho"><a href="https://www.jojoen.co.jp/shop/jojoen/nagoya_sakae/" target="_blank" rel="noopener">叙々苑 名古屋栄店</a>で焼肉ランチ</h3>
+      <p>ランチタイムは11:00〜15:00（LO）なので13時スタートでも余裕。栄駅サカエチカS8出口すぐのマルエイガレリア3F。和風特別個室・テーブル個室あり、全席禁煙。</p>
+      <span class="tag">LUNCH</span>
+    </div>
+    <div class="stop">
+      <span class="time">15:00〜16:00頃</span>
+      <h3 class="mincho"><a href="https://suzumeodori.co.jp/" target="_blank" rel="noopener">雀おどり總本店</a>で甘味</h3>
+      <p>焼肉のあとの一服。喫茶は18:30ラストオーダーなので、この時間なら余裕を持って楽しめる。</p>
+      <span class="tag">SWEETS</span>
+    </div>
+    <div class="stop">
+      <span class="time">17:00頃</span>
+      <h3 class="mincho"><a href="https://www.hotpepper.jp/strJ000023017/" target="_blank" rel="noopener">コンパル栄東店</a>でお土産</h3>
+      <p>栄 森の地下街 南二番街、地下鉄の改札近く。19:00まで営業（LO18:30）なので、この時間なら間に合う。</p>
+      <span class="tag">SOUVENIR</span>
+    </div>
+    <div class="stop">
+      <span class="time">夕方〜夜・帰路</span>
+      <h3 class="mincho">近鉄名古屋 → 津 → 車で帰宅</h3>
+      <p>ディナーがない分、早めの時間に動ける。帰りはひのとりにこだわらず、急行や他の特急でも津まで戻れる。津駅で車に乗り換え、勢和多気IC経由で帰宅。</p>
+      <span class="tag">RETURN + CAR</span>
+    </div>
+  </div>
+</section>
+
+<section class="sweets">
+  <h2 class="mincho">甘味処の候補</h2>
+  <p class="lead">どちらのプランでも寄れるように、口コミ評価の高い店を集めました。その日の気分で選べます。</p>
+
+  <div class="sweets-grid">
+
+    <div class="sweet-card">
+      <span class="area">伏見</span>
+      <h3 class="mincho"><a href="https://tabelog.com/aichi/A2301/A230102/23001235/" target="_blank" rel="noopener">むらさきや</a></h3>
+      <span class="score">食べログ <b>3.63</b>／273人</span>
+      <p>伏見エリアのスイーツで点数1位。和菓子店とカフェ・甘味処を兼ねた店。</p>
+      <div class="links">
+        <a href="https://tabelog.com/aichi/A2301/A230102/23001235/" target="_blank" rel="noopener">食べログ</a>
+      </div>
+    </div>
+
+    <div class="sweet-card">
+      <span class="area">矢場町</span>
+      <h3 class="mincho"><a href="https://suzumeodori.co.jp/" target="_blank" rel="noopener">雀おどり總本店</a></h3>
+      <span class="score">食べログ <b>3.62</b>／721人</span>
+      <p>1856年創業。錦鯉の池がある落ち着いた店内。和菓子・甘味処EAST百名店2023選出、口コミ数の多さが際立つ。10:30〜19:00（喫茶18:30まで）。</p>
+      <div class="links">
+        <a href="https://suzumeodori.co.jp/" target="_blank" rel="noopener">公式サイト</a>
+        <a href="https://tabelog.com/aichi/A2301/A230103/23001219/" target="_blank" rel="noopener">食べログ</a>
+      </div>
+    </div>
+
+    <div class="sweet-card">
+      <span class="area">伏見｜美術館から近い</span>
+      <h3 class="mincho"><a href="https://sawadasyoten.jp/" target="_blank" rel="noopener">甘味や 澤田商店</a></h3>
+      <span class="score">食べログ <b>3.62</b>／424人</span>
+      <p>昭和から続く氷問屋の直営。古民家を改装した昭和レトロな和空間。スイーツEAST百名店2023選出、愛知県のかき氷6位。11:30〜19:00（LO18:30）、火曜定休。</p>
+      <div class="links">
+        <a href="https://sawadasyoten.jp/" target="_blank" rel="noopener">公式サイト</a>
+        <a href="https://tabelog.com/aichi/A2301/A230102/23004021/" target="_blank" rel="noopener">食べログ</a>
+      </div>
+    </div>
+
+    <div class="sweet-card">
+      <span class="area">東別院</span>
+      <h3 class="mincho"><a href="https://tabelog.com/aichi/A2301/A230105/23031436/" target="_blank" rel="noopener">甘味処 柴ふく</a></h3>
+      <span class="score">古民家の和カフェ</span>
+      <p>築120年の印鑑屋を改装した空間。東別院駅4番出口から徒歩1〜2分、看板犬の柴がいる。</p>
+      <div class="links">
+        <a href="https://tabelog.com/aichi/A2301/A230105/23031436/" target="_blank" rel="noopener">食べログ</a>
+      </div>
+    </div>
+
+    <div class="sweet-card">
+      <span class="area">東山公園｜隈研吾建築</span>
+      <h3 class="mincho"><a href="https://ryoguchiya-korekiyo.co.jp/shop/%E6%9D%B1%E5%B1%B1%E5%BA%97/" target="_blank" rel="noopener">両口屋是清 東山店「喜蝸庵」</a></h3>
+      <span class="score">1634年創業の老舗</span>
+      <p>隈研吾設計の建物、2階は檜のルーバーに囲まれた静かな甘味喫茶。栄から地下鉄東山線で10分ほど。喫茶11:00〜17:30（17:00LO）、木曜定休。</p>
+      <div class="links">
+        <a href="https://ryoguchiya-korekiyo.co.jp/shop/%E6%9D%B1%E5%B1%B1%E5%BA%97/" target="_blank" rel="noopener">公式サイト</a>
+      </div>
+    </div>
+
+    <div class="sweet-card note">
+      <span class="area">栄町｜持ち帰り専門</span>
+      <h3 class="mincho"><a href="https://tabelog.com/aichi/A2301/A230103/23027478/" target="_blank" rel="noopener">川口屋</a></h3>
+      <span class="score">食べログ <b>3.71</b>／416人</span>
+      <p>1688年（元禄）創業、点数は最高。ただし店内で座れず持ち帰りのみ、日曜・祝日定休。週末は昼過ぎに売切れるので予約推奨。</p>
+      <div class="links">
+        <a href="https://tabelog.com/aichi/A2301/A230103/23027478/" target="_blank" rel="noopener">食べログ</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="compare">
+  <h2 class="mincho">A / B 比較</h2>
+  <table>
+    <tr>
+      <th>項目</th>
+      <th>PLAN A（樹一）</th>
+      <th>PLAN B（叙々苑）</th>
+    </tr>
+    <tr>
+      <td class="head">焼肉のタイミング</td>
+      <td>夜（17時〜）</td>
+      <td>昼（13時〜）</td>
+    </tr>
+    <tr>
+      <td class="head">個室の形式</td>
+      <td>完全個室（4部屋）・松阪牛専門</td>
+      <td>和風特別個室・テーブル個室あり</td>
+    </tr>
+    <tr>
+      <td class="head">帰宅時間</td>
+      <td>やや遅め（ディナー後）</td>
+      <td>早め（ランチ後に午後を使う）</td>
+    </tr>
+    <tr>
+      <td class="head">全体の雰囲気</td>
+      <td>夜にかけて特別感のある流れ</td>
+      <td>昼から自然に流れる、軽やかな一日</td>
+    </tr>
+  </table>
+</section>
+
+<footer>HINOTORI DAY TRIP ｜ 津 ⇄ 近鉄名古屋</footer>
+
+<script>
+  function showPlan(which){
+    document.getElementById('planA').classList.toggle('active', which==='A');
+    document.getElementById('planB').classList.toggle('active', which==='B');
+    document.getElementById('btnA').classList.toggle('active', which==='A');
+    document.getElementById('btnB').classList.toggle('active', which==='B');
+  }
+</script>
+
+</body>
+</html>
