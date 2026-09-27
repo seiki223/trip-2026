@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>秋から冬のおでかけ候補</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --kuro:#2a2420;      /* 定式幕の黒 */
+  --kaki:#a9502f;      /* 定式幕の柿色 */
+  --moegi:#46633c;     /* 定式幕の萌葱 */
+  --paper:#eef0e9;     /* 薄い灰緑の和紙 */
+  --card:#fbfbf8;
+  --ink:#2a2420;
+  --sub:#6a625b;
+  --line:#d6d8cf;
+  --btn-ink:#fbfbf8;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1d1b19; --card:#27241f; --ink:#ece7df; --sub:#b3aaa0; --line:#3b3731;
+    --kaki:#d0734e; --moegi:#7fa06f; --kuro:#0f0d0c; --btn-ink:#1d1b19;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1d1b19; --card:#27241f; --ink:#ece7df; --sub:#b3aaa0; --line:#3b3731;
+  --kaki:#d0734e; --moegi:#7fa06f; --kuro:#0f0d0c; --btn-ink:#1d1b19;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  font-size:16px; line-height:1.75; -webkit-text-size-adjust:100%;
+}
+.maku{
+  display:grid; grid-template-columns:1fr 1fr 1fr; height:14px;
+}
+.maku span:nth-child(1){background:var(--kuro)}
+.maku span:nth-child(2){background:var(--kaki)}
+.maku span:nth-child(3){background:var(--moegi)}
+header{
+  max-width:640px; margin:0 auto; padding:40px 22px 8px;
+}
+h1{
+  font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  font-weight:900; font-size:clamp(30px,8vw,42px); line-height:1.3; margin:0 0 14px;
+  letter-spacing:.02em;
+}
+.lead{margin:0; color:var(--sub); font-size:15px}
+.picks{
+  max-width:640px; margin:26px auto 0; padding:0 22px;
+}
+.picks p{
+  margin:0; padding:14px 16px; border-left:4px solid var(--kaki);
+  background:var(--card); font-size:15px;
+}
+.picks b{font-weight:700}
+nav{
+  max-width:640px; margin:22px auto 0; padding:0 22px;
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+nav a{
+  color:var(--ink); text-decoration:none; font-size:14px; font-weight:500;
+  border:1px solid var(--line); padding:6px 12px; border-radius:999px; background:var(--card);
+}
+main{max-width:640px; margin:0 auto; padding:8px 22px 40px}
+section{margin-top:40px}
+h2{
+  font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  font-weight:700; font-size:24px; margin:0 0 4px; display:flex; align-items:center; gap:10px;
+}
+h2::before{
+  content:""; width:22px; height:22px; flex:none;
+  background:linear-gradient(90deg,var(--kuro) 0 33.3%,var(--kaki) 33.3% 66.6%,var(--moegi) 66.6%);
+  border-radius:3px;
+}
+.sec-note{margin:0 0 14px; color:var(--sub); font-size:14px}
+.item{
+  background:var(--card); border-top:1px solid var(--line);
+  padding:18px 16px 20px;
+}
+.item:last-child{border-bottom:1px solid var(--line)}
+.item h3{
+  font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  font-weight:700; font-size:19px; line-height:1.45; margin:0 0 8px;
+}
+.osusume{
+  display:inline-block; font-family:"Zen Kaku Gothic New",sans-serif;
+  font-size:12px; font-weight:700; color:var(--btn-ink); background:var(--kaki);
+  padding:1px 8px; border-radius:3px; margin-bottom:6px;
+}
+dl{margin:0 0 10px; display:grid; grid-template-columns:auto 1fr; gap:2px 12px; font-size:15px}
+dt{color:var(--sub); white-space:nowrap}
+dd{margin:0}
+.item p{margin:0 0 12px; font-size:15px}
+ul.sched{margin:0 0 12px; padding:0; list-style:none; font-size:15px}
+ul.sched li{padding:6px 0; border-bottom:1px dashed var(--line)}
+ul.sched li:last-child{border-bottom:none}
+ul.sched .d{display:block; color:var(--moegi); font-weight:700; font-size:14px}
+.btn{
+  display:inline-block; text-decoration:none; font-weight:700; font-size:14px;
+  color:var(--btn-ink); background:var(--moegi); padding:9px 16px; border-radius:6px;
+}
+.btn + .btn{margin-left:6px}
+.btn:focus-visible, nav a:focus-visible{outline:3px solid var(--kaki); outline-offset:2px}
+.ise{display:block; margin-top:4px; font-weight:700; color:var(--kaki)}
+.later{display:inline-block; font-weight:700; color:var(--btn-ink); background:var(--kuro); padding:0 8px; border-radius:3px; margin-right:2px}
+ul.links{margin:0; padding:0; list-style:none}
+ul.links li{padding:10px 0; border-bottom:1px dashed var(--line); font-size:15px}
+ul.links li:last-child{border-bottom:none}
+ul.links a{color:var(--ink); font-weight:700}
+ul.links small{display:block; color:var(--sub); font-size:13px}
+.item.top{border-left:4px solid var(--kaki)}
+.route{font-size:14px; color:var(--moegi); font-weight:700}
+.item.mini{padding:16px 16px 12px}
+.item.mini h3{font-size:17px}
+.item.mini ul.sched{font-size:15px}
+.item.mini a{color:var(--ink); text-underline-offset:3px}
+footer{
+  max-width:640px; margin:0 auto; padding:10px 22px 48px; text-align:center;
+}
+footer p{
+  font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  font-size:18px; margin:0 0 6px;
+}
+footer small{color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="maku" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<header>
+  <h1>秋から冬の<br>おでかけ候補</h1>
+</header>
+
+<nav aria-label="目次">
+  <a href="#noh">能・狂言</a>
+  <a href="#bijutsu">美術館</a>
+  <a href="#nagoya">名古屋</a>
+  <a href="#nagahama">滋賀</a>
+  <a href="#lightup">京都の夜</a>
+  <a href="#chikaba">近場</a>
+  <a href="#toode">遠出</a>
+  <a href="#kabuki">歌舞伎</a>
+</nav>
+
+<main>
+
+<section id="noh">
+  <h2>能・狂言</h2>
+
+  <div class="item">
+    <h3>野村萬斎 還暦記念「狂言ござる乃座 in KYOTO」</h3>
+    <dl>
+      <dt>日時</dt><dd>11/15（日）14:00〜　2時間くらい</dd>
+      <dt>場所</dt><dd>京都観世会館（平安神宮の近く）</dd>
+    </dl>
+    <p>お父さんの万作さん（人間国宝）、息子の裕基さんと親子三代で出る回も。終わったら夜は京都駅すぐの東本願寺へ。御影堂が光の蓮の花で彩られて、渉成園の夜の庭をドリンク片手に歩ける「NAKED GARDEN NIGHTS」をやってる（10/31〜12/6）。</p>
+    <a class="btn" href="https://mansaku.co.jp/information/performance/" target="_blank" rel="noopener">公演ページを見る</a>
+  </div>
+</section>
+
+<section id="bijutsu">
+  <h2>美術館</h2>
+
+  <div class="item top">
+    <h3>大英博物館の江戸絵画展「百花繚乱」</h3>
+    <dl>
+      <dt>会期</dt><dd>10/31（土）〜2027年1/31（日）月曜休み</dd>
+      <dt>場所</dt><dd>大阪中之島美術館</dd>
+    </dl>
+    <p>北斎、広重、歌麿、写楽の浮世絵がずらり。バラバラになってた3つの襖絵が、約150年ぶりにひとつに揃う。ナビゲーターは<b>市川染五郎</b>さん。</p>
+    <a class="btn" href="https://nakka-art.jp/exhibition-post/daiei-ten2026/" target="_blank" rel="noopener">展覧会を見る</a>
+  </div>
+
+  <div class="item top">
+    <h3>NHK日曜美術館 50年展</h3>
+    <dl>
+      <dt>会期</dt><dd>〜12/20（日）</dd>
+      <dt>場所</dt><dd>大阪中之島美術館</dd>
+    </dl>
+    <p>番組の映像と本物の作品を一緒に観られる。縄文土器から工芸、岡本太郎まで幅広く。</p>
+    <a class="btn" href="https://nakka-art.jp/exhibition-post/nichibiten50/" target="_blank" rel="noopener">展覧会を見る</a>
+  </div>
+
+  <div class="item">
+    <h3>芹沢銈介と萠木会の作家たち</h3>
+    <dl>
+      <dt>会期</dt><dd>〜12/15（火）水曜休み</dd>
+      <dt>場所</dt><dd>大阪日本民芸館（万博公園の中）</dd>
+    </dl>
+    <p>芹沢銈介とお弟子さんたちの染色。柚木沙弥郎の作品も。公園の紅葉もきれいな時期。</p>
+    <a class="btn" href="https://www.mingeikan-osaka.or.jp/" target="_blank" rel="noopener">民芸館を見る</a>
+  </div>
+
+  <div class="item mini">
+    <h3>前に話したのも、まだやってるで</h3>
+    <ul class="sched">
+      <li><span class="d">〜12/6</span><a href="https://www.aham.jp/exhibition/future/wyeth/" target="_blank" rel="noopener">アンドリュー・ワイエス展</a>（あべのハルカス）</li>
+      <li><span class="d">〜12/13</span><a href="https://kenbi.pref.gifu.lg.jp/" target="_blank" rel="noopener">岐阜県美術館 フランス近代絵画</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="nagoya">
+  <h2>名古屋</h2>
+
+  <div class="item top">
+    <h3>愛知県陶磁美術館の陶芸体験</h3>
+    <dl>
+      <dt>場所</dt><dd>愛知県瀬戸市（美術館の中の陶芸館）</dd>
+      <dt>内容</dt><dd>手回しろくろなどで器を作る「作陶」か、お皿やカップに描く「絵付け」</dd>
+      <dt>時間</dt><dd>2時間くらい。受付は9:30〜14:30の間で30分ごとにスタート</dd>
+      <dt>休み</dt><dd>月曜日</dd>
+    </dl>
+    <p>土は白と赤から、釉薬は青磁や織部など9種類から選べる本格派。焼き上がった作品は1〜2か月後に受け取りか郵送。美術館なので、やきものの展示もあわせて見られる。</p>
+    <p>予約はネットのみ（電話は不可）。</p>
+    <a class="btn" href="https://aitou.museum/workshop/index.php" target="_blank" rel="noopener">体験の案内を見る</a><a class="btn" href="https://coubic.com/aitou_tougeikan/405151" target="_blank" rel="noopener">予約ページ</a>
+  </div>
+
+  <div class="item">
+    <h3>ゴッホの跳ね橋と印象派の画家たち</h3>
+    <dl>
+      <dt>会期</dt><dd>〜11/29（日）月曜休み</dd>
+      <dt>場所</dt><dd>名古屋市美術館（伏見・栄）</dd>
+    </dl>
+    <p>ゴッホの《跳ね橋》に、モネ、ルノワール、セザンヌ、ゴーギャン、マティスなど70点。ドイツ・ケルンの美術館から。</p>
+    <a class="btn" href="https://static.chunichi.co.jp/chunichi/pages/event/vangoghandtheimpressionists/" target="_blank" rel="noopener">展覧会を見る</a>
+  </div>
+
+  <div class="item">
+    <h3>大須商店街</h3>
+    <p>「ぐっさん家」の初回放送でも歩いた、テレビでおなじみの商店街。大須観音にお参りして、食べ歩きや古着・雑貨めぐり。老舗喫茶「コンパル」のエビフライサンドも名物。</p>
+    <a class="btn" href="https://tabi-mag.jp/ai0310/" target="_blank" rel="noopener">コンパル大須本店を見る</a>
+  </div>
+
+  <div class="item">
+    <h3>名古屋城 夜間ライトアップ「Be GOLD」</h3>
+    <dl>
+      <dt>期間</dt><dd>〜10/4（日）、10/18（日）〜24（土）</dd>
+      <dt>時間</dt><dd>17:00〜20:00（最終入場19:30）</dd>
+    </dl>
+    <p>名古屋城の「金」がテーマの光の演出。天守閣や石垣へのプロジェクションマッピング、レーザー、二之丸庭園をミストで包む光の雲海。15分ごとに天守閣まわりが一斉に黄金に輝くクライマックスがある。この期間だけ夜の城内を歩ける。</p>
+    <p>天守閣は今は入れないけど、復元された<b>本丸御殿</b>は中に入って見学できる。豪華な障壁画や飾り金具で飾られた、尾張藩主の御殿。</p>
+    <a class="btn" href="https://www.nagoyajo.city.nagoya.jp/nagoya-jo_interactive/be-gold/" target="_blank" rel="noopener">Be GOLDを見る</a>
+  </div>
+</section>
+
+<section id="nagahama">
+  <h2>滋賀</h2>
+  <div class="item">
+    <h3>佐川美術館と信楽陶器まつり</h3>
+    <dl>
+      <dt>佐川美術館</dt><dd>藤田嗣治展 〜11/23（月・祝）　守山市</dd>
+      <dt>陶器まつり</dt><dd>10/10（土）〜18（日）　甲賀市信楽町</dd>
+    </dl>
+    <p>佐川美術館は、水に浮かぶように建つ美術館。藤田嗣治の展覧会に、樂吉左衞門の茶碗を見る樂吉左衞門館も。</p>
+    <p>信楽陶器まつりは、町のあちこちの窯元やお店を巡って器を探すスタイル。午前に信楽で器を見て、午後は佐川美術館で、やきものの一日。</p>
+    <a class="btn" href="https://www.sagawa-artmuseum.or.jp/" target="_blank" rel="noopener">佐川美術館を見る</a><a class="btn" href="https://shigaraki-matsuri.org/" target="_blank" rel="noopener">信楽陶器まつりを見る</a>
+  </div>
+
+  <div class="item">
+    <h3>黒壁スクエア</h3>
+    <p>北国街道沿いの、江戸〜明治の古い建物が並ぶ町並み。中心は明治33年に建てられた旧銀行を使った「黒壁ガラス館」（国の登録有形文化財）で、国内外のガラス作品が並ぶ。</p>
+    <p>吹きガラスやトンボ玉、サンドブラスト（グラスに模様を彫る）、陶芸などの<b>体験</b>ができるお店も集まっていて、お店どうしが近いので歩いて回りやすい。名物ののっぺいうどんも。</p>
+    <p>陶芸は、黒壁スクエアの中（24号館）の「陶芸工房ほっこくがま」で。電動ろくろ30分くらいの気軽なコースや、手回しろくろのコースがあって、ネット予約できる。</p>
+    <a class="btn" href="https://kurokabe-square.com/" target="_blank" rel="noopener">黒壁スクエアを見る</a><a class="btn" href="https://www.jalan.net/kankou/sta_990670/g2_S0/" target="_blank" rel="noopener">長浜の陶芸体験を見る</a>
+  </div>
+</section>
+
+<section id="lightup">
+  <h2>京都の秋のライトアップ</h2>
+  <div class="item mini">
+    <ul class="sched">
+      <li><span class="d">10/23〜12/5</span><a href="https://kyototravel.info/kouyoulightup" target="_blank" rel="noopener">二条城 NAKED meets 二条城</a></li>
+      <li><span class="d">10/31〜12/6</span><a href="https://micetimes.jp/naked-garden-nights2026/" target="_blank" rel="noopener">東本願寺・渉成園 NAKED GARDEN NIGHTS</a></li>
+      <li><span class="d">10/31〜12/13</span><a href="https://toji.or.jp/" target="_blank" rel="noopener">東寺 紅葉ライトアップ</a></li>
+      <li><span class="d">9/30〜11/8</span><a href="https://arashiyama-tsukitouro.jp/" target="_blank" rel="noopener">嵐山月灯路（竹林の小径）</a></li>
+      <li><span class="d">一覧</span><a href="https://souda-kyoto.jp/event/detail/lightup-autumn.html" target="_blank" rel="noopener">そうだ 京都、行こう。</a>／<a href="https://ja.kyoto.travel/times/night/article/single.php?id=454" target="_blank" rel="noopener">京都市公式 秋の夜観光</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="chikaba">
+  <h2>近場</h2>
+
+  <div class="item">
+    <h3>五十鈴の森クラフトフェア</h3>
+    <dl>
+      <dt>日程</dt><dd>11/7（土）・8（日）10:00〜16:00</dd>
+      <dt>場所</dt><dd>伊勢・五十鈴公園（車で30分）</dd>
+    </dl>
+    <p>全国のクラフト作家さんが集まる。内宮のすぐ近く。</p>
+    <a class="btn" href="https://ichishina.com/iszm" target="_blank" rel="noopener">公式を見る</a><a class="btn" href="https://ichishina.com/" target="_blank" rel="noopener">いちしなのサイト</a>
+  </div>
+
+  <div class="item">
+    <h3>焼肉 一升びん</h3>
+    <dl>
+      <dt>場所</dt><dd>松阪市ほか（本店は松阪駅の近く）</dd>
+    </dl>
+    <p>松阪牛の焼肉。ホルモンと焼きレバーも名物。</p>
+    <a class="btn" href="https://retty.me/restaurant/100000032920/" target="_blank" rel="noopener">本店を見る</a>
+  </div>
+</section>
+
+<section id="toode">
+  <h2>ちょっと遠出</h2>
+  <div class="item">
+    <h3>大塚国際美術館（徳島・鳴門）</h3>
+    <dl>
+      <dt>場所</dt><dd>徳島県鳴門市（車で4時間くらい）</dd>
+      <dt>時間</dt><dd>9:30〜17:00　月曜休み（祝日なら翌日）</dd>
+    </dl>
+    <p>世界の名画約1,000点を、陶板で原寸大に再現した美術館。<b>フェルメールの《真珠の耳飾りの少女》のリベンジ</b>にも。世界中の美術館に散らばっているフェルメールの作品を、一か所で見られる。ほかにもシスティーナ礼拝堂を丸ごと再現した大空間や、ゴッホの「ひまわり」、モネの「大睡蓮」も。作品にさわったり、写真を撮ったりもできる。</p>
+    <p>館内がとても広いので、ソファで休みながらゆっくり。車椅子の貸し出しもある。</p>
+    <p class="route">勢和多気（6:10）→ 美術館（10:05〜16:00）→ 鳴門公園（16:30）→ 淡路島で夕ごはん（17:30）→ 帰着（22:00ごろ）</p>
+    <a class="btn" href="https://o-museum.or.jp/" target="_blank" rel="noopener">美術館を見る</a>
+  </div>
+</section>
+
+<section id="kabuki">
+  <h2>歌舞伎</h2>
+
+  <div class="item">
+    <h3>映画館で観る歌舞伎（シネマ歌舞伎）</h3>
+    <dl>
+      <dt>場所</dt><dd>109シネマズ四日市（車で1時間弱）</dd>
+    </dl>
+    <p>本物の舞台を撮影して映画館で上映。2時間前後で、表情もアップでよく見える。</p>
+    <ul class="sched">
+      <li><span class="d">11/13（金）〜19（木）</span>玉三郎「沓手鳥孤城落月／楊貴妃」</li>
+      <li><span class="d">12/4（金）〜10（木）</span>野田秀樹「研辰の討たれ」笑って泣ける話</li>
+      <li><span class="d">1/15（金）〜2/4（木）</span>三谷幸喜「幕を閉めるな」幸四郎・愛之助・獅童のコメディ。お話の舞台は、なんと<b>伊勢の芝居小屋</b>！</li>
+    </ul>
+    <a class="btn" href="https://www.shochiku.co.jp/cinemakabuki/tsukiichi/" target="_blank" rel="noopener">上映作品を見る</a>
+  </div>
+
+  <div class="item">
+    <h3>南座 歌舞伎鑑賞教室（京都）</h3>
+    <dl>
+      <dt>日程</dt><dd>もう<b>来年</b>の9/9（木）〜17（金）</dd>
+    </dl>
+    <p>来年の秋なので、ちょっと先の話。初心者向けで、解説付きの短めの公演。生で観るならこれが一番やさしそう。</p>
+    <a class="btn" href="https://www.kabuki-bito.jp/theaters/kyoto/play/1008" target="_blank" rel="noopener">公演ページを見る</a>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>
